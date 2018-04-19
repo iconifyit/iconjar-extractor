@@ -1,0 +1,1578 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fnil\fcharset0 Verdana;}
+{\colortbl;\red255\green255\blue255;\red76\green78\blue78;\red0\green0\blue0;\red108\green5\blue211;
+\red0\green0\blue255;\red64\green128\blue0;\red251\green0\blue7;\red0\green22\blue176;\red68\green21\blue176;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c29999\c30457\c30457;\csgenericrgb\c0\c0\c0;\csgenericrgb\c42337\c1841\c82833;
+\csgenericrgb\c0\c0\c100000;\csgenericrgb\c25000\c50001\c0;\cssrgb\c100000\c0\c0;\csgenericrgb\c0\c8656\c68986;\csgenericrgb\c26552\c8264\c69162;
+}
+\deftab480
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 --\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 --	Created by: Scott Lewis\cf3 \
+\cf2 --	Created on: 4/18/18\cf3 \
+\cf2 --\cf3 \
+\cf2 --	Copyright \'a9 2018 Atomic Lotus, LLC. All Rights Reserved.\cf3 \
+\cf2 --\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 use
+\b0 \cf3  \cf4 AppleScript\cf3  \cf5 version\cf3  \cf3 "2.4"\cf3  \cf2 -- Yosemite (10.10) or later\cf3 \
+
+\b \cf3 use
+\b0 \cf3  
+\i \cf5 scripting additions
+\i0 \cf3 \
+
+\b \cf3 use
+\b0 \cf3  
+\i \cf5 framework
+\i0 \cf3  \cf3 "Foundation"\cf3 \
+
+\b \cf3 use
+\b0 \cf3  
+\i \cf5 framework
+\i0 \cf3  \cf3 "AppKit"\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- 1. Accept dropped file\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 on
+\b0 \cf3  
+\b \cf5 open
+\b0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFiles\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 rootOutputFolder\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 "~/Desktop/iconjar-extractor/"\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+	
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 tell
+\b0 \cf3  
+\i \cf5 application
+\i0 \cf3  \cf3 "Finder"\cf3 \
+			
+\b \cf3 if
+\b0 \cf3  
+\b \cf3 not
+\b0 \cf3  (
+\b \cf3 my
+\b0 \cf3  \cf7 folder_exists\cf3 (\cf6 rootOutputFolder\cf3 )) 
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 folderName\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 dirname\cf3 (\cf6 rootOutputFolder\cf3 )\
+				
+\b \cf3 set
+\b0 \cf3  \cf6 folderPath\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 parent_dir\cf3 (\cf6 rootOutputFolder\cf3 )\
+				
+\b \cf5 make
+\b0 \cf3  \cf5 new\cf3  
+\i \cf5 folder
+\i0 \cf3  \cf5 at\cf3  (
+\b \cf3 my
+\b0 \cf3  \cf7 to_alias\cf3 (\cf3 "~/Desktop"\cf3 )) \cf5 with properties\cf3  \{\cf4 name\cf3 :\cf6 folderName\cf3 \}\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 tell
+\b0 \cf3 \
+	
+\b \cf3 on
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf5 log
+\b0 \cf3  (\cf3 "Can't create root output folder : "\cf3  & \cf6 eMsg\cf3  & \cf3 " ["\cf3  & \cf6 eNum\cf3  & \cf3 "]"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 try
+\b0 \cf3 \
+	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 repeat
+\b0 \cf3  
+\b \cf3 with
+\b0 \cf3  \cf6 theFile\cf3  
+\b \cf3 in
+\b0 \cf3  \cf6 theFiles\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 theFileInfo\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf8 info for
+\b0 \cf3  \cf6 theFile\cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFileInfo\cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theFileBaseName\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 basename\cf3 (\cf6 theFileName\cf3 )\
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theFilePath\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFile\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 metaDataPath\cf3  
+\b \cf3 to
+\b0 \cf3  ((\cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFile\cf3 ) & \cf3 "META"\cf3 ) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 iconsDirPath\cf3  
+\b \cf3 to
+\b0 \cf3  ((\cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFile\cf3 ) & \cf3 "icons/"\cf3 ) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFileInfo\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+		\cf2 -- 2. Copy "icons" and "META" from dropped file to "extracted" folder\cf3 \
+		\cf2 -- com.iconjar-jar\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 theFileType\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 get_file_type\cf3 (\cf6 theFilePath\cf3 )\
+		
+\b \cf3 if
+\b0 \cf3  \cf6 theFileType\cf3  
+\b \cf3 is
+\b0 \cf3  
+\b \cf3 not
+\b0 \cf3  \cf3 "com.iconjar-jar"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+			
+\b \cf8 display dialog
+\b0 \cf3  \cf3 "This script only works with IconJar files. "\cf3  & \cf6 theFileType\cf3  & \cf3 " given."\cf3  \cf8 buttons\cf3  \{\cf3 "Cancel"\cf3 \}\
+			
+\b \cf3 exit
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+		\
+		\cf2 -- 3. Make a new directory for the exports\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 uuid\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 short_uuid\cf3 ()\
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theOutputPath\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 rootOutputFolder\cf3  & 
+\b \cf3 my
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theFileName\cf3 , \cf3 ".iconjar"\cf3 , \cf3 ""\cf3 ) & \cf3 "-"\cf3  & \cf6 uuid\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 theSrcFolder\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 theOutputPath\cf3  & \cf3 "/src"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theOutputFolder\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 theOutputPath\cf3  & \cf3 "/out"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "mkdir "\cf3  & \cf6 theOutputPath\cf3  
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+		
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "mkdir "\cf3  & \cf6 theSrcFolder\cf3  
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+		
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "mkdir "\cf3  & \cf6 theOutputFolder\cf3  
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "chmod 777 "\cf3  & \cf6 theOutputPath\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) 
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+		\cf2 -- 4. Copy META to META.zip\cf3 \
+		\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "cp "\cf3  & \cf6 metaDataPath\cf3  & \cf3 " "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/META.gz"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) 
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "cp -R "\cf3  & \cf6 iconsDirPath\cf3  & \cf3 " "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/icons"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) 
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "chmod -R 777 "\cf3  & \cf6 theOutputPath\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) 
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+		\cf2 -- 5. Decompress the GZIP file\cf3 \
+		\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "gunzip -kf "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/META.gz"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+		\cf2 -- 6. Rename META.zip folder to META.json\cf3 \
+		\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 theMetaJsonPath\cf3  
+\b \cf3 to
+\b0 \cf3  (\cf6 theSrcFolder\cf3  & \cf3 "/META.json"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theMetaExtractPath\cf3  
+\b \cf3 to
+\b0 \cf3  (\cf6 theSrcFolder\cf3  & \cf3 "/META"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "cp "\cf3  & \cf6 theMetaExtractPath\cf3  & \cf3 " "\cf3  & \cf6 theMetaJsonPath\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+		\cf2 -- 8. Rename /icons/\{icon\} using tags\cf3 \
+		\cf2 -- return\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 my
+\b0 \cf3  \cf7 rename_icons\cf3 (\cf6 theMetaJsonPath\cf3 , \cf6 theSrcFolder\cf3  & \cf3 "/icons/"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+		\cf2 -- 9. Re-zip "icons" for upload\cf3 \
+		\
+		\cf2 -- return\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 sh_script\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 "cd "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "; zip -r "\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf3 "icons"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\cf2 -- return sh_script\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "cd "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "; zip -r "\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf3 "icons"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "mv "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\
+	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 end
+\b0 \cf3  
+\b \cf5 open
+\b0 \cf3 \
+\
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- --------------------\cf3 \
+\cf2 -- FUNCTIONS\cf3 \
+\cf2 -- --------------------\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 on
+\b0 \cf3  \cf7 short_uuid\cf3 ()\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 uuid\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "uuidgen"\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 uuid\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 uuid\cf3 , \cf3 "-"\cf3 , \cf3 " "\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 uuid\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "A=\\""\cf3  & \cf6 uuid\cf3  & \cf3 "\\" ; echo \\"$\{A##* \}\\";"\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  \cf6 uuid\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 short_uuid\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 file_exists\cf3 (\cf6 theFile\cf3 ) \cf2 -- (String) as Boolean\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 test\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "[ ! -f '"\cf3  & \cf6 theFile\cf3  & \cf3 "' ] || echo 1 ;"\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  (\cf6 test\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 number
+\i0 \cf3 ) 
+\b \cf3 is
+\b0 \cf3  \cf3 1\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 file_exists\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 folder_exists\cf3 (\cf6 theFile\cf3 ) \cf2 -- (String) as Boolean\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theFile\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 expand_path\cf3 (\cf6 theFile\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 test\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "[ ! -d '"\cf3  & \cf6 theFile\cf3  & \cf3 "' ] || echo 1 ;"\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  (\cf6 test\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 number
+\i0 \cf3 ) 
+\b \cf3 is
+\b0 \cf3  \cf3 1\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 folder_exists\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 dirname\cf3 (\cf6 thepath\cf3 )\
+	
+\b \cf3 if
+\b0 \cf3  
+\i \cf5 character
+\i0 \cf3  (\cf4 length\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 thepath\cf3 ) 
+\b \cf3 of
+\b0 \cf3  \cf6 thepath\cf3  
+\b \cf3 is
+\b0 \cf3  \cf3 "/"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 thepath\cf3  
+\b \cf3 to
+\b0 \cf3  
+\i \cf5 characters
+\i0 \cf3  \cf3 1\cf3  
+\b \cf3 thru
+\b0 \cf3  ((\cf4 length\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 thepath\cf3 ) - \cf3 1\cf3 ) 
+\b \cf3 of
+\b0 \cf3  \cf6 thepath\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 return
+\b0 \cf3  
+\i \cf5 item
+\i0 \cf3  \cf3 -1\cf3  
+\b \cf3 of
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 explode\cf3 (\cf3 "/"\cf3 , \cf6 thepath\cf3 )\
+
+\b \cf3 end
+\b0 \cf3  \cf7 dirname\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 parent_dir\cf3 (\cf6 thepath\cf3 )\
+	
+\b \cf3 local
+\b0 \cf3  \cf6 ASTID\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 ASTID\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 "/"\cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theBaseName\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\i \cf5 text items
+\i0 \cf3  \cf3 1\cf3  
+\b \cf3 thru
+\b0 \cf3  \cf3 -3\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 thepath\cf3  & \cf3 ""\cf3 ) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 return
+\b0 \cf3  \cf6 theBaseName\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 on
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 error
+\b0 \cf3  \cf3 "Can't get base name: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 end
+\b0 \cf3  \cf7 parent_dir\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 rename_icons\cf3 (\cf6 theMetaDataFile\cf3 , \cf6 theIconFolderPath\cf3 )\
+	\cf2 -- set theJsonData to read_file(theMetaDataFile as \'abclass furl\'bb)\cf3 \
+	\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theJsonData\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "cat "\cf3  & \cf6 theMetaDataFile\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ))\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 tell
+\b0 \cf3  
+\i \cf5 application
+\i0 \cf3  \cf3 "JSON Helper"\cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 theData\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf5 read JSON from
+\b0 \cf3  \cf6 theJsonData\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 tell
+\b0 \cf3 \
+	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 set
+\b0 \cf3  \cf6 theIcons\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 |items|\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theData\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 set
+\b0 \cf3  \cf6 iconsDict\cf3  
+\b \cf3 to
+\b0 \cf3  
+\i \cf4 current application's
+\i0 \cf3  \cf6 NSDictionary's\cf3  \cf7 dictionaryWithDictionary\cf3 :\cf6 theIcons\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theKeys\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 iconsDict's\cf3  \cf7 allKeys\cf3 ()\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 set
+\b0 \cf3  \cf6 steps\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf5 count
+\b0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theKeys\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\cf7 progress_start\cf3 (\cf6 steps\cf3 , \cf3 "Processing icons ..."\cf3 , \cf3 "Preparing to process."\cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 set
+\b0 \cf3  \cf6 iconUpdates\cf3  
+\b \cf3 to
+\b0 \cf3  \{\}\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 n\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 1\cf3 \
+	
+\b \cf3 repeat
+\b0 \cf3  
+\b \cf3 with
+\b0 \cf3  \cf6 theKey\cf3  
+\b \cf3 in
+\b0 \cf3  \cf6 theKeys\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\cf2 -- Update the progress detail\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\cf7 progress_update\cf3 (\cf6 n\cf3 , \cf6 steps\cf3 , \cf3 "Processing icon "\cf3 )\
+		
+\b \cf3 repeat
+\b0 \cf3  \cf3 1\cf3  
+\b \cf3 times
+\b0 \cf3  \cf2 -- # fake loop\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 theIcon\cf3  
+\b \cf3 to
+\b0 \cf3  (\cf6 iconsDict's\cf3  \cf7 valueForKey\cf3 :\cf6 theKey\cf3 ) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 record
+\i0 \cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 theTags\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 tags\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theIcon\cf3 \
+			
+\b \cf3 if
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 trim\cf3 (\cf6 theTags\cf3 ) 
+\b \cf3 is
+\b0 \cf3  \cf3 ""\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 exit
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 set
+\b0 \cf3  \cf6 theName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 |name|\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theIcon\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 theFile\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 |file|\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theIcon\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 newFileName\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 tags_to_slug\cf3 (\cf6 theTags\cf3 )\
+			
+\b \cf3 set
+\b0 \cf3  \cf6 newFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 "test-"\cf3  & \cf6 newFileName\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf5 log
+\b0 \cf3  \cf6 newFileName\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 from_file\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 theIconFolderPath\cf3  & \cf6 theFile\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 the_ext\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 file_ext\cf3 (\cf6 from_file\cf3 )\
+			
+\b \cf3 set
+\b0 \cf3  \cf6 to_file\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 theIconFolderPath\cf3  & \cf6 newFileName\cf3  & \cf3 "."\cf3  & \cf6 the_ext\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 mv_script\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 "mv "\cf3  & \cf6 from_file\cf3  & \cf3 " "\cf3  & \cf6 to_file\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf8 do shell script
+\b0 \cf3  \cf6 mv_script\cf3 \
+			
+\b \cf5 log
+\b0 \cf3  \cf6 mv_script\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			\cf2 -- (BEGIN) Update Icon\cf3 \
+			\cf2 -- set |file| of theIcon to newFileName & "." & the_ext as string\cf3 \
+			\cf2 -- copy theIcon to the end of iconUpdates\cf3 \
+			\cf2 -- set (iconsDict's valueForKey:theKey) to theIcon\cf3 \
+			\cf2 -- (END) Update Icon\cf3 \
+		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+		\cf2 -- Increment the progress\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 my
+\b0 \cf3  \cf7 progress_step\cf3 (\cf6 n\cf3 )\
+		
+\b \cf3 set
+\b0 \cf3  \cf6 n\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 n\cf3  + \cf3 1\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 number
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+	\
+	\cf2 -- Reset the progress information\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\cf7 progress_end\cf3 ()\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 return
+\b0 \cf3  \cf6 iconUpdates\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 rename_icons\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 get_file_type\cf3 (\cf6 theFilePath\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theUTI\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\i \cf4 current application's
+\i0 \cf3  \cf6 NSWorkspace's\cf3  \cf7 sharedWorkspace\cf3 ()'s \cf7 typeOfFile\cf3 :\cf6 theFilePath\cf3  \cf7 |error|\cf3 :(
+\i \cf5 missing value
+\i0 \cf3 ))\
+	
+\b \cf3 if
+\b0 \cf3  \cf6 theUTI\cf3  = 
+\i \cf5 missing value
+\i0 \cf3  
+\b \cf3 then
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 theError's\cf3  \cf7 localizedDescription\cf3 () 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 text
+\i0 \cf3 \
+	
+\b \cf3 return
+\b0 \cf3  \cf6 theUTI\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 text
+\i0 \cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 get_file_type\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- (BEGIN) - Progress bar\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 on
+\b0 \cf3  \cf7 progress_start\cf3 (\cf6 steps\cf3 , \cf6 descript\cf3 , \cf6 descript_add\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress total steps\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 steps\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress completed steps\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 0\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress description\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 descript\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress additional description\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 descript_add\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 progress_start\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 progress_update\cf3 (\cf6 n\cf3 , \cf6 steps\cf3 , \cf6 message\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress additional description\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 message\cf3  & \cf6 n\cf3  & \cf3 " of "\cf3  & \cf6 steps\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 progress_update\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 progress_step\cf3 (\cf6 n\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress completed steps\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 n\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 progress_step\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 progress_end\cf3 ()\
+	\cf2 -- Reset the progress information\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress total steps\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 0\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress completed steps\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 0\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress description\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 ""\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf4 progress additional description\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 ""\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 progress_end\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- (END) - Progress bar\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 on
+\b0 \cf3  \cf7 tags_to_slug\cf3 (\cf6 tags\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 str_to_lower\cf3 (\cf7 str_replace\cf3 (\cf6 tags\cf3 , \cf3 ","\cf3 , \cf3 "-"\cf3 ))\
+
+\b \cf3 end
+\b0 \cf3  \cf7 tags_to_slug\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 file_ext\cf3 (\cf6 file_name\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 sh_script\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 "filename=\\""\cf3  & \cf6 file_name\cf3  & \cf3 "\\"; "\cf3  & \cf3 "echo $\{filename##*.\}"\cf3 \
+	
+\b \cf3 return
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "filename=\\""\cf3  & \cf6 file_name\cf3  & \cf3 "\\"; "\cf3  & \cf3 "echo $\{filename##*.\}"\cf3 ))\
+
+\b \cf3 end
+\b0 \cf3  \cf7 file_ext\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 basename\cf3 (\cf6 file_name\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "filename=\\""\cf3  & \cf6 file_name\cf3  & \cf3 "\\"; "\cf3  & \cf3 "echo $\{filename%.*\}"\cf3 ))\
+
+\b \cf3 end
+\b0 \cf3  \cf7 basename\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 str_to_upper\cf3 (\cf6 inString\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "awk '\{ print toupper($0) \}' <<< \\""\cf3  & \cf6 inString\cf3  & \cf3 "\\""\cf3 )\
+
+\b \cf3 end
+\b0 \cf3  \cf7 str_to_upper\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 str_to_lower\cf3 (\cf6 inString\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  (
+\b \cf8 do shell script
+\b0 \cf3  \cf3 "awk '\{ print tolower($0) \}' <<< \\""\cf3  & \cf6 inString\cf3  & \cf3 "\\""\cf3 )\
+
+\b \cf3 end
+\b0 \cf3  \cf7 str_to_lower\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 home_dir\cf3 ()\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 homeFolder\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\b \cf8 path to
+\b0 \cf3  
+\i \cf9 home folder
+\i0 \cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  \cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 homeFolder\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 home_dir\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 to_posix\cf3 (\cf6 thepath\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  ((\cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 expand_path\cf3 (\cf6 thepath\cf3 )) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+
+\b \cf3 end
+\b0 \cf3  \cf7 to_posix\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 to_alias\cf3 (\cf6 thepath\cf3 )\
+	(
+\i \cf5 POSIX file
+\i0 \cf3  (
+\b \cf3 my
+\b0 \cf3  \cf7 expand_path\cf3 (\cf6 thepath\cf3 ))) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 alias
+\i0 \cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 to_alias\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 expand_path\cf3 (\cf6 givenPath\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 givenPath\cf3 , \cf3 "~/"\cf3 , \cf7 home_dir\cf3 ())\
+
+\b \cf3 end
+\b0 \cf3  \cf7 expand_path\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 load_script\cf3 (\cf6 scriptName\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theScript\cf3  
+\b \cf3 to
+\b0 \cf3  (\cf7 desktop_dir\cf3 () & \cf6 scriptName\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  (
+\b \cf8 load script
+\b0 \cf3  \cf6 theScript\cf3 )\
+
+\b \cf3 end
+\b0 \cf3  \cf7 load_script\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 desktop_dir\cf3 ()\
+	
+\b \cf3 return
+\b0 \cf3  \cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  (
+\b \cf8 path to
+\b0 \cf3  
+\i \cf9 desktop folder
+\i0 \cf3 )\
+
+\b \cf3 end
+\b0 \cf3  \cf7 desktop_dir\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 read_file\cf3 (\cf6 unixPath\cf3 )\
+	
+\b \cf3 return
+\b0 \cf3  (
+\b \cf8 read
+\b0 \cf3  \cf6 unixPath\cf3 )\
+
+\b \cf3 end
+\b0 \cf3  \cf7 read_file\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 trim\cf3 (\cf6 someText\cf3 )\
+	\cf2 -- default values (all whitespace)\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theseCharacters\cf3  
+\b \cf3 to
+\b0 \cf3  \{\cf3 " "\cf3 , \cf4 tab\cf3 , 
+\b \cf8 ASCII character
+\b0 \cf3  \cf3 10\cf3 , \cf4 return\cf3 , 
+\b \cf8 ASCII character
+\b0 \cf3  \cf3 0\cf3 \}\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 repeat
+\b0 \cf3  
+\b \cf3 until
+\b0 \cf3  
+\b \cf3 first
+\b0 \cf3  
+\i \cf5 character
+\i0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 someText\cf3  
+\b \cf3 is not
+\b0 \cf3  
+\b \cf3 in
+\b0 \cf3  \cf6 theseCharacters\cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 someText\cf3  
+\b \cf3 to
+\b0 \cf3  
+\i \cf5 text
+\i0 \cf3  \cf3 2\cf3  
+\b \cf3 thru
+\b0 \cf3  \cf3 -1\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 someText\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 repeat
+\b0 \cf3  
+\b \cf3 until
+\b0 \cf3  
+\b \cf3 last
+\b0 \cf3  
+\i \cf5 character
+\i0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 someText\cf3  
+\b \cf3 is not
+\b0 \cf3  
+\b \cf3 in
+\b0 \cf3  \cf6 theseCharacters\cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 someText\cf3  
+\b \cf3 to
+\b0 \cf3  
+\i \cf5 text
+\i0 \cf3  \cf3 1\cf3  
+\b \cf3 thru
+\b0 \cf3  \cf3 -2\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 someText\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 return
+\b0 \cf3  \cf6 someText\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 trim\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 explode\cf3 (\cf6 the_delim\cf3 , \cf6 the_string\cf3 )\
+	
+\b \cf3 local
+\b0 \cf3  \cf6 ASTID\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 ASTID\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 the_items\cf3  
+\b \cf3 to
+\b0 \cf3  \{\}\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 the_delim\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		\cf2 -- set the_items to every text item of the_string\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 the_parts\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 every
+\b0 \cf3  
+\i \cf5 text item
+\i0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 the_string\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 list
+\i0 \cf3 \
+		
+\b \cf3 repeat
+\b0 \cf3  
+\b \cf3 with
+\b0 \cf3  \cf6 the_item\cf3  
+\b \cf3 in
+\b0 \cf3  \cf6 the_parts\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			\cf2 -- set the_items to the_items & trim(the_item) as list\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 copy
+\b0 \cf3  \cf6 the_item\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 the_items\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 return
+\b0 \cf3  \cf6 the_items\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 list
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 on
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 error
+\b0 \cf3  \cf3 "Can't do split: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 end
+\b0 \cf3  \cf7 explode\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 implode\cf3 (\cf6 delimiter\cf3 , \cf6 pieces\cf3 )\
+	
+\b \cf3 local
+\b0 \cf3  \cf6 delimiter\cf3 , \cf6 pieces\cf3 , \cf6 ASTID\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 ASTID\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 delimiter\cf3 \
+		
+\b \cf5 log
+\b0 \cf3  (\cf6 pieces\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+		
+\b \cf3 set
+\b0 \cf3  \cf6 the_string\cf3  
+\b \cf3 to
+\b0 \cf3  (
+\i \cf5 items
+\i0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 pieces\cf3 ) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 return
+\b0 \cf3  \cf6 the_string\cf3  \cf2 --> text\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 on
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 error
+\b0 \cf3  \cf3 "Can't implode: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 end
+\b0 \cf3  \cf7 implode\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theText\cf3 , \cf6 oldString\cf3 , \cf6 newString\cf3 )\
+	
+\b \cf3 local
+\b0 \cf3  \cf6 ASTID\cf3 , \cf6 theText\cf3 , \cf6 oldString\cf3 , \cf6 newString\cf3 , \cf6 lst\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 ASTID\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 try
+\b0 \cf3 \
+		
+\b \cf3 considering
+\b0 \cf3  
+\i \cf4 case
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 oldString\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 lst\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 every
+\b0 \cf3  
+\i \cf5 text item
+\i0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theText\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 newString\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 theText\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 lst\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 considering
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 return
+\b0 \cf3  \cf6 theText\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 on
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 ASTID\cf3 \
+		
+\b \cf3 error
+\b0 \cf3  \cf3 "Can't replaceString: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 end
+\b0 \cf3  \cf7 str_replace\cf3 \
+}
