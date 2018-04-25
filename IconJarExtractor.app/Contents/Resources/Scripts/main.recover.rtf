@@ -35,7 +35,8 @@
 \i \cf5 framework
 \i0 \cf3  \cf3 "AppKit"\cf3 \
 \
-\cf2 -- 1. Accept dropped file\cf3 \
+\cf2 -- [1] -- Accept dropped file\cf3 \
+\
 
 \b \cf3 on
 \b0 \cf3  
@@ -45,8 +46,9 @@
 \b0 \cf3  \cf6 theFiles\cf3 \
 	\
 	\cf2 -- set aFile to to_alias("~/Downloads/people-food-home-and-sports.iconjar")\cf3 \
+	\cf2 -- set aFile to to_alias("~/Downloads/people, food, home and sports.iconjar")\cf3 \
 	\cf2 -- set theFiles to \{aFile\}\cf3 \
-	\cf2 -- 	\cf3 \
+	\
 	
 \b \cf3 set
 \b0 \cf3  \cf6 rootOutputFolder\cf3  
@@ -191,9 +193,16 @@
 \b0 \cf3  \cf4 name\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theFileInfo\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 theFileFolder\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 parent_dir\cf3 (\cf6 theFilePath\cf3 )\
 			\
-			\cf2 -- 2. Copy "icons" and "META" from dropped file to "extracted" folder\cf3 \
-			\cf2 -- com.iconjar-jar\cf3 \
+			\cf2 -- [2] -- Copy "icons" and "META" from dropped file to "extracted" folder\cf3 \
+			\
 			
 \b \cf3 set
 \b0 \cf3  \cf6 theFileType\cf3  
@@ -224,7 +233,203 @@
 \b \cf3 if
 \b0 \cf3 \
 			\
-			\cf2 -- 3. Make a new directory for the exports\cf3 \
+			\cf2 -- [3] -- Make sure the file path has no commas or spaces which can cause trouble\cf3 \
+			\
+			
+\b \cf3 set
+\b0 \cf3  \cf6 theCommaTest\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theFileName\cf3 , \cf3 ","\cf3 , \cf3 "-"\cf3 )\
+			
+\b \cf3 set
+\b0 \cf3  \cf6 theSpaceTest\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theFileName\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 )\
+			\
+			
+\b \cf3 if
+\b0 \cf3  \cf6 theCommaTest\cf3  
+\b \cf3 is not
+\b0 \cf3  
+\b \cf3 equal to
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 or
+\b0 \cf3  \cf6 theSpaceTest\cf3  
+\b \cf3 is not
+\b0 \cf3  
+\b \cf3 equal to
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 newFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theFileName\cf3 , \cf3 ","\cf3 , \cf3 "-"\cf3 )\
+				
+\b \cf3 set
+\b0 \cf3  \cf6 newFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 newFileName\cf3 , \cf3 " "\cf3 , \cf3 "-"\cf3 )\
+				
+\b \cf3 set
+\b0 \cf3  \cf6 newFilePath\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 theFileFolder\cf3  & \cf6 newFileName\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 tmpFilePath\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 theFilePath\cf3 \
+				
+\b \cf3 if
+\b0 \cf3  
+\i \cf5 character
+\i0 \cf3  (\cf4 length\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 tmpFilePath\cf3 ) 
+\b \cf3 of
+\b0 \cf3  \cf6 tmpFilePath\cf3  
+\b \cf3 is
+\b0 \cf3  \cf3 "/"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+					
+\b \cf3 set
+\b0 \cf3  \cf6 tmpFilePath\cf3  
+\b \cf3 to
+\b0 \cf3  
+\i \cf5 characters
+\i0 \cf3  \cf3 1\cf3  
+\b \cf3 thru
+\b0 \cf3  \cf3 -2\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFilePath\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+				
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 tmpFilePath\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 quoted form\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 tmpFilePath\cf3 \
+				\
+				
+\b \cf3 if
+\b0 \cf3  
+\b \cf3 not
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 file_exists\cf3 (\cf6 newFilePath\cf3 ) 
+\b \cf3 then
+\b0 \cf3 \
+					
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "cp -R "\cf3  & \cf6 tmpFilePath\cf3  & \cf3 " "\cf3  & \cf6 newFilePath\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+				
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 theFile\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 to_alias\cf3 (\cf6 newFilePath\cf3 )\
+				\
+				
+\b \cf3 set
+\b0 \cf3  \cf6 theFileInfo\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf8 info for
+\b0 \cf3  \cf6 theFile\cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFileInfo\cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 theFileBaseName\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 basename\cf3 (\cf6 theFileName\cf3 )\
+				
+\b \cf3 set
+\b0 \cf3  \cf6 theFilePath\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFile\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 metaDataPath\cf3  
+\b \cf3 to
+\b0 \cf3  ((\cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFile\cf3 ) & \cf3 "META"\cf3 ) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 iconsDirPath\cf3  
+\b \cf3 to
+\b0 \cf3  ((\cf4 POSIX path\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFile\cf3 ) & \cf3 "icons/"\cf3 ) 
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 theFileInfo\cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 theFileFolder\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 parent_dir\cf3 (\cf6 theFilePath\cf3 )\
+				\
+			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+			\
+			\cf2 -- [4] -- Make a new directory for the exports\cf3 \
+			\
 			
 \b \cf3 set
 \b0 \cf3  \cf6 uuid\cf3  
@@ -288,7 +493,7 @@
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
 			\
-			\cf2 -- 4. Copy META to META.zip\cf3 \
+			\cf2 -- [5] -- Copy META to META.zip\cf3 \
 			\
 			
 \b \cf8 do shell script
@@ -318,7 +523,7 @@
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
 			\
-			\cf2 -- 5. Decompress the GZIP file\cf3 \
+			\cf2 -- [6] -- Decompress the GZIP file\cf3 \
 			\
 			
 \b \cf8 do shell script
@@ -328,7 +533,7 @@
 \i \cf5 string
 \i0 \cf3 )\
 			\
-			\cf2 -- 6. Rename META.zip folder to META.json\cf3 \
+			\cf2 -- [7] -- Rename META.zip folder to META.json\cf3 \
 			\
 			
 \b \cf3 set
@@ -357,7 +562,7 @@
 \i \cf5 string
 \i0 \cf3 )\
 			\
-			\cf2 -- 8. Rename /icons/\{icon\} using tags\cf3 \
+			\cf2 -- [8] -- Rename /icons/\{icon\} using tags\cf3 \
 			\cf2 -- return\cf3 \
 			
 \b \cf3 my
@@ -367,9 +572,8 @@
 \i \cf5 string
 \i0 \cf3 )\
 			\
-			\cf2 -- 9. Re-zip "icons" for upload\cf3 \
+			\cf2 -- [9] -- Re-zip "icons" for upload\cf3 \
 			\
-			\cf2 -- return\cf3 \
 			
 \b \cf5 log
 \b0 \cf3  \cf3 "cd "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "; zip -r "\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf3 "icons"\cf3  
@@ -416,6 +620,41 @@
 \i \cf5 string
 \i0 \cf3 )\
 			\
+			
+\b \cf3 set
+\b0 \cf3  \cf6 doOpen\cf3  
+\b \cf3 to
+\b0 \cf3  \cf9 button returned\cf3  
+\b \cf3 of
+\b0 \cf3  (
+\b \cf8 display dialog
+\b0 \cf3  (\cf3 "Your icons have been renamed and moved to `"\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip`"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) \cf8 buttons\cf3  \{\cf3 "Cancel"\cf3 , \cf3 "Open"\cf3 \})\
+			
+\b \cf3 if
+\b0 \cf3  \cf6 doOpen\cf3  
+\b \cf3 is
+\b0 \cf3  
+\b \cf3 equal to
+\b0 \cf3  \cf3 "Open"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "open "\cf3  & \cf6 theOutputFolder\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+			\
 		
 \b \cf3 on
 \b0 \cf3  
@@ -448,6 +687,65 @@
 \cf2 -- --------------------\cf3 \
 \cf2 -- FUNCTIONS\cf3 \
 \cf2 -- --------------------\cf3 \
+\
+
+\b \cf3 on
+\b0 \cf3  \cf7 safe_file_name\cf3 (\cf6 theFileName\cf3 , \cf6 theFilePath\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theCommaTest\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theFileName\cf3 , \cf3 ","\cf3 , \cf3 "-"\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theSpaceTest\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theFileName\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 )\
+	
+\b \cf3 if
+\b0 \cf3  \cf6 doCommaTest\cf3  
+\b \cf3 is not
+\b0 \cf3  
+\b \cf3 equal to
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 or
+\b0 \cf3  \cf6 theSpaceTest\cf3  
+\b \cf3 is not
+\b0 \cf3  
+\b \cf3 equal to
+\b0 \cf3  \cf6 theFileName\cf3  
+\b \cf3 then
+\b0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 newFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 theFileName\cf3 , \cf3 ","\cf3 , \cf3 "-"\cf3 )\
+		
+\b \cf3 set
+\b0 \cf3  \cf6 newFileName\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 newFileName\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 )\
+		
+\b \cf3 set
+\b0 \cf3  \cf6 newFilePath\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 theFileFolder\cf3  & \cf6 newFileName\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+		
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "mv "\cf3  & \cf6 theFilePath\cf3  & \cf3 " "\cf3  & \cf6 newFilePath\cf3 )\
+	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 safe_file_name\cf3 \
 \
 
 \b \cf3 on
