@@ -29,14 +29,6 @@ When reporting a bug, please include as much detail as possible including:
 
 I am happy to provide limited support at no charge. I am also available for hire for custom scripts and more complex support issues.
 
-## Credits
-
-IconJarExtractor would not be possible without the fantastic JSON AppleScript utility by [MouseDown.net](http://www.mousedown.net/mouseware/JSONHelper.html), who has graciously donated a free copy of the tool to this project. Please visit their page and donate. 
-
-## Donations
-
-Donations help open source developers continue to create free resources. You can donate to this project at https://paypal.me/iconify. 25% of all donations to this script will be contributed to MouseDown.net
-
 ## Change Log
 2018-04-25 : Fixed a bug related to file names with spaces or commas (IconJar or icon file names) causing the script to break
 
@@ -44,3 +36,11 @@ Donations help open source developers continue to create free resources. You can
 
 ## Known Issues
 - There are no known issues at this time. See **Reporting a Bug** above for instructions for reporting issues
+
+## Acknowledgements
+- Thanks to Hemmo de Jong a. k. a., [Dutch Icon](https://twitter.com/dutchicon) for help testing (and his patience)
+- Thanks to [MouseDown.net](http://www.mousedown.net/mouseware/JSONHelper.html) for graciously providing a free copy of the JSON Helper app for AppleScript to this project. Please visit their page and donate.
+
+## Donations
+
+Donations help open source developers continue to create free resources. You can donate to this project via [my PayPal page](https://paypal.me/iconify). 25% of all donations to this script will be contributed to MouseDown.net
