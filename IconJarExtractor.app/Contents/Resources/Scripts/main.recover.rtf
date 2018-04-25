@@ -10,14 +10,12 @@
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf2 --\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 --	Created by: Scott Lewis\cf3 \
 \cf2 --	Created on: 4/18/18\cf3 \
 \cf2 --\cf3 \
 \cf2 --	Copyright \'a9 2018 Atomic Lotus, LLC. All Rights Reserved.\cf3 \
 \cf2 --\cf3 \
 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 use
 \b0 \cf3  \cf4 AppleScript\cf3  \cf5 version\cf3  \cf3 "2.4"\cf3  \cf2 -- Yosemite (10.10) or later\cf3 \
@@ -37,9 +35,7 @@
 \i \cf5 framework
 \i0 \cf3  \cf3 "AppKit"\cf3 \
 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 -- 1. Accept dropped file\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  
@@ -47,18 +43,20 @@
 \b0 \cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theFiles\cf3 \
+	\
+	\cf2 -- set aFile to to_alias("~/Downloads/people-food-home-and-sports.iconjar")\cf3 \
+	\cf2 -- set theFiles to \{aFile\}\cf3 \
+	\cf2 -- 	\cf3 \
 	
 \b \cf3 set
 \b0 \cf3  \cf6 rootOutputFolder\cf3  
 \b \cf3 to
 \b0 \cf3  \cf3 "~/Desktop/iconjar-extractor/"\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
+	\
 	
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 tell
 \b0 \cf3  
 \i \cf5 application
@@ -93,8 +91,7 @@
 \i0 \cf3  \cf5 at\cf3  (
 \b \cf3 my
 \b0 \cf3  \cf7 to_alias\cf3 (\cf3 "~/Desktop"\cf3 )) \cf5 with properties\cf3  \{\cf4 name\cf3 :\cf6 folderName\cf3 \}\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			
+			
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 if
@@ -109,54 +106,52 @@
 \b0 \cf3  
 \b \cf3 error
 \b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf5 log
 \b0 \cf3  (\cf3 "Can't create root output folder : "\cf3  & \cf6 eMsg\cf3  & \cf3 " ["\cf3  & \cf6 eNum\cf3  & \cf3 "]"\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 try
 \b0 \cf3 \
 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 repeat
 \b0 \cf3  
 \b \cf3 with
 \b0 \cf3  \cf6 theFile\cf3  
 \b \cf3 in
 \b0 \cf3  \cf6 theFiles\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		\
+		
+\b \cf3 try
+\b0 \cf3 \
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theFileInfo\cf3  
 \b \cf3 to
 \b0 \cf3  
 \b \cf8 info for
 \b0 \cf3  \cf6 theFile\cf3 \
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theFileName\cf3  
 \b \cf3 to
 \b0 \cf3  \cf4 name\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theFileInfo\cf3 \
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theFileBaseName\cf3  
 \b \cf3 to
 \b0 \cf3  
 \b \cf3 my
 \b0 \cf3  \cf7 basename\cf3 (\cf6 theFileName\cf3 )\
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theFilePath\cf3  
 \b \cf3 to
@@ -167,7 +162,7 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 metaDataPath\cf3  
 \b \cf3 to
@@ -178,7 +173,7 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 iconsDirPath\cf3  
 \b \cf3 to
@@ -189,26 +184,24 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theFileName\cf3  
 \b \cf3 to
 \b0 \cf3  \cf4 name\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theFileInfo\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-		\cf2 -- 2. Copy "icons" and "META" from dropped file to "extracted" folder\cf3 \
-		\cf2 -- com.iconjar-jar\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			\cf2 -- 2. Copy "icons" and "META" from dropped file to "extracted" folder\cf3 \
+			\cf2 -- com.iconjar-jar\cf3 \
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theFileType\cf3  
 \b \cf3 to
 \b0 \cf3  
 \b \cf3 my
 \b0 \cf3  \cf7 get_file_type\cf3 (\cf6 theFilePath\cf3 )\
-		
+			
 \b \cf3 if
 \b0 \cf3  \cf6 theFileType\cf3  
 \b \cf3 is
@@ -217,31 +210,29 @@
 \b0 \cf3  \cf3 "com.iconjar-jar"\cf3  
 \b \cf3 then
 \b0 \cf3 \
-			
+				
 \b \cf8 display dialog
 \b0 \cf3  \cf3 "This script only works with IconJar files. "\cf3  & \cf6 theFileType\cf3  & \cf3 " given."\cf3  \cf8 buttons\cf3  \{\cf3 "Cancel"\cf3 \}\
-			
+				
 \b \cf3 exit
 \b0 \cf3  
 \b \cf3 repeat
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 if
 \b0 \cf3 \
-		\
-		\cf2 -- 3. Make a new directory for the exports\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			\cf2 -- 3. Make a new directory for the exports\cf3 \
+			
 \b \cf3 set
 \b0 \cf3  \cf6 uuid\cf3  
 \b \cf3 to
 \b0 \cf3  
 \b \cf3 my
 \b0 \cf3  \cf7 short_uuid\cf3 ()\
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theOutputPath\cf3  
 \b \cf3 to
@@ -252,10 +243,8 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theSrcFolder\cf3  
 \b \cf3 to
@@ -264,7 +253,7 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theOutputFolder\cf3  
 \b \cf3 to
@@ -273,25 +262,23 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			
 \b \cf8 do shell script
 \b0 \cf3  \cf3 "mkdir "\cf3  & \cf6 theOutputPath\cf3  
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
-		
+			
 \b \cf8 do shell script
 \b0 \cf3  \cf3 "mkdir "\cf3  & \cf6 theSrcFolder\cf3  
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
-		
+			
 \b \cf8 do shell script
 \b0 \cf3  \cf3 "mkdir "\cf3  & \cf6 theOutputFolder\cf3  
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
-		
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "chmod 777 "\cf3  & \cf6 theOutputPath\cf3  
 \b \cf3 as
@@ -300,12 +287,10 @@
 \i0 \cf3 ) 
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-		\cf2 -- 4. Copy META to META.zip\cf3 \
-		\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			\cf2 -- 4. Copy META to META.zip\cf3 \
+			\
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "cp "\cf3  & \cf6 metaDataPath\cf3  & \cf3 " "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/META.gz"\cf3  
 \b \cf3 as
@@ -314,7 +299,7 @@
 \i0 \cf3 ) 
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
-		
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "cp -R "\cf3  & \cf6 iconsDirPath\cf3  & \cf3 " "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/icons"\cf3  
 \b \cf3 as
@@ -323,7 +308,7 @@
 \i0 \cf3 ) 
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
-		
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "chmod -R 777 "\cf3  & \cf6 theOutputPath\cf3  
 \b \cf3 as
@@ -332,24 +317,20 @@
 \i0 \cf3 ) 
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-		\cf2 -- 5. Decompress the GZIP file\cf3 \
-		\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			\cf2 -- 5. Decompress the GZIP file\cf3 \
+			\
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "gunzip -kf "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/META.gz"\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-		\cf2 -- 6. Rename META.zip folder to META.json\cf3 \
-		\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			\cf2 -- 6. Rename META.zip folder to META.json\cf3 \
+			\
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theMetaJsonPath\cf3  
 \b \cf3 to
@@ -358,7 +339,7 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-		
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theMetaExtractPath\cf3  
 \b \cf3 to
@@ -367,35 +348,51 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "cp "\cf3  & \cf6 theMetaExtractPath\cf3  & \cf3 " "\cf3  & \cf6 theMetaJsonPath\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-		\cf2 -- 8. Rename /icons/\{icon\} using tags\cf3 \
-		\cf2 -- return\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			\cf2 -- 8. Rename /icons/\{icon\} using tags\cf3 \
+			\cf2 -- return\cf3 \
+			
 \b \cf3 my
 \b0 \cf3  \cf7 rename_icons\cf3 (\cf6 theMetaJsonPath\cf3 , \cf6 theSrcFolder\cf3  & \cf3 "/icons/"\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
-		\cf2 -- 9. Re-zip "icons" for upload\cf3 \
-		\
-		\cf2 -- return\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			\
+			\cf2 -- 9. Re-zip "icons" for upload\cf3 \
+			\
+			\cf2 -- return\cf3 \
+			
+\b \cf5 log
+\b0 \cf3  \cf3 "cd "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "; zip -r "\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf3 "icons"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf5 log
+\b0 \cf3  \cf3 "cd "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "; zip -r "\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf3 "icons"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf5 log
+\b0 \cf3  \cf3 "mv "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			\
+			
 \b \cf3 set
 \b0 \cf3  \cf6 sh_script\cf3  
 \b \cf3 to
@@ -404,31 +401,43 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\cf2 -- return sh_script\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "cd "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "; zip -r "\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf3 "icons"\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-		
+			
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "mv "\cf3  & \cf6 theSrcFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip "\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\
+			\
+		
+\b \cf3 on
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+			
+\b \cf8 display dialog
+\b0 \cf3  (\cf3 "[ERROR "\cf3  & \cf6 eNum\cf3  & \cf3 "] "\cf3  & \cf6 eMsg\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) \cf8 buttons\cf3  \{\cf3 "OK"\cf3 \}\
+		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 try
+\b0 \cf3 \
 	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 repeat
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 end
 \b0 \cf3  
@@ -436,12 +445,10 @@
 \b0 \cf3 \
 \
 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 -- --------------------\cf3 \
 \cf2 -- FUNCTIONS\cf3 \
 \cf2 -- --------------------\cf3 \
 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 short_uuid\cf3 ()\
@@ -559,14 +566,12 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 if
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 return
 \b0 \cf3  
 \i \cf5 item
@@ -590,12 +595,10 @@
 \b0 \cf3  \cf6 ASTID\cf3  
 \b \cf3 to
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -623,14 +626,12 @@
 		
 \b \cf3 return
 \b0 \cf3  \cf6 theBaseName\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 on
 \b0 \cf3  
 \b \cf3 error
 \b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -638,13 +639,11 @@
 		
 \b \cf3 error
 \b0 \cf3  \cf3 "Can't get base name: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 end
 \b0 \cf3  \cf7 parent_dir\cf3 \
@@ -665,10 +664,8 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 ))\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	\
+	
 \b \cf3 tell
 \b0 \cf3  
 \i \cf5 application
@@ -680,25 +677,21 @@
 \b0 \cf3  
 \b \cf5 read JSON from
 \b0 \cf3  \cf6 theJsonData\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 tell
 \b0 \cf3 \
 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 set
 \b0 \cf3  \cf6 theIcons\cf3  
 \b \cf3 to
 \b0 \cf3  \cf6 |items|\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theData\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	\
+	
 \b \cf3 set
 \b0 \cf3  \cf6 iconsDict\cf3  
 \b \cf3 to
@@ -710,10 +703,8 @@
 \b0 \cf3  \cf6 theKeys\cf3  
 \b \cf3 to
 \b0 \cf3  \cf6 iconsDict's\cf3  \cf7 allKeys\cf3 ()\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	\
+	
 \b \cf3 set
 \b0 \cf3  \cf6 steps\cf3  
 \b \cf3 to
@@ -722,14 +713,10 @@
 \b0 \cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theKeys\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\cf7 progress_start\cf3 (\cf6 steps\cf3 , \cf3 "Processing icons ..."\cf3 , \cf3 "Preparing to process."\cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	\
+	\cf7 progress_start\cf3 (\cf6 steps\cf3 , \cf3 "Processing icons ..."\cf3 , \cf3 "Preparing to process."\cf3 )\
+	\
+	
 \b \cf3 set
 \b0 \cf3  \cf6 iconUpdates\cf3  
 \b \cf3 to
@@ -746,10 +733,8 @@
 \b0 \cf3  \cf6 theKey\cf3  
 \b \cf3 in
 \b0 \cf3  \cf6 theKeys\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\cf2 -- Update the progress detail\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\cf7 progress_update\cf3 (\cf6 n\cf3 , \cf6 steps\cf3 , \cf3 "Processing icon "\cf3 )\
+		\cf2 -- Update the progress detail\cf3 \
+		\cf7 progress_update\cf3 (\cf6 n\cf3 , \cf6 steps\cf3 , \cf3 "Processing icon "\cf3 )\
 		
 \b \cf3 repeat
 \b0 \cf3  \cf3 1\cf3  
@@ -785,14 +770,12 @@
 \b0 \cf3  
 \b \cf3 repeat
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			
+			
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 if
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			
+			
 \b \cf3 set
 \b0 \cf3  \cf6 theName\cf3  
 \b \cf3 to
@@ -813,15 +796,6 @@
 \b0 \cf3  
 \b \cf3 my
 \b0 \cf3  \cf7 tags_to_slug\cf3 (\cf6 theTags\cf3 )\
-			
-\b \cf3 set
-\b0 \cf3  \cf6 newFileName\cf3  
-\b \cf3 to
-\b0 \cf3  \cf3 "test-"\cf3  & \cf6 newFileName\cf3  
-\b \cf3 as
-\b0 \cf3  
-\i \cf5 string
-\i0 \cf3 \
 			
 \b \cf5 log
 \b0 \cf3  \cf6 newFileName\cf3 \
@@ -852,6 +826,16 @@
 \i0 \cf3 \
 			
 \b \cf3 set
+\b0 \cf3  \cf6 to_file\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 to_file\cf3 , \cf3 " "\cf3 , \cf3 "-"\cf3 )\
+			
+\b \cf3 set
+\b0 \cf3  \cf6 from_file\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 from_file\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 )\
+			
+\b \cf3 set
 \b0 \cf3  \cf6 mv_script\cf3  
 \b \cf3 to
 \b0 \cf3  \cf3 "mv "\cf3  & \cf6 from_file\cf3  & \cf3 " "\cf3  & \cf6 to_file\cf3  
@@ -865,8 +849,7 @@
 			
 \b \cf5 log
 \b0 \cf3  \cf6 mv_script\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			\cf2 -- (BEGIN) Update Icon\cf3 \
+			\cf2 -- (BEGIN) Update Icon\cf3 \
 			\cf2 -- set |file| of theIcon to newFileName & "." & the_ext as string\cf3 \
 			\cf2 -- copy theIcon to the end of iconUpdates\cf3 \
 			\cf2 -- set (iconsDict's valueForKey:theKey) to theIcon\cf3 \
@@ -877,8 +860,7 @@
 \b \cf3 repeat
 \b0 \cf3 \
 		\cf2 -- Increment the progress\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 my
 \b0 \cf3  \cf7 progress_step\cf3 (\cf6 n\cf3 )\
 		
@@ -890,20 +872,16 @@
 \b0 \cf3  
 \i \cf5 number
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 repeat
 \b0 \cf3 \
 	\
 	\cf2 -- Reset the progress information\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\cf7 progress_end\cf3 ()\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	\cf7 progress_end\cf3 ()\
+	\
+	
 \b \cf3 return
 \b0 \cf3  \cf6 iconUpdates\cf3 \
 
@@ -946,9 +924,7 @@
 \b \cf3 end
 \b0 \cf3  \cf7 get_file_type\cf3 \
 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 -- (BEGIN) - Progress bar\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 progress_start\cf3 (\cf6 steps\cf3 , \cf6 descript\cf3 , \cf6 descript_add\cf3 )\
@@ -1027,10 +1003,8 @@
 
 \b \cf3 end
 \b0 \cf3  \cf7 progress_end\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 -- (END) - Progress bar\cf3 \
 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 tags_to_slug\cf3 (\cf6 tags\cf3 )\
@@ -1223,10 +1197,8 @@
 \b0 \cf3  \cf3 10\cf3 , \cf4 return\cf3 , 
 \b \cf8 ASCII character
 \b0 \cf3  \cf3 0\cf3 \}\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	\
+	
 \b \cf3 repeat
 \b0 \cf3  
 \b \cf3 until
@@ -1252,15 +1224,13 @@
 \b0 \cf3  \cf3 -1\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 someText\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 repeat
 \b0 \cf3 \
 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 repeat
 \b0 \cf3  
 \b \cf3 until
@@ -1286,15 +1256,13 @@
 \b0 \cf3  \cf3 -2\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 someText\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 repeat
 \b0 \cf3 \
 	\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 return
 \b0 \cf3  \cf6 someText\cf3 \
 
@@ -1317,20 +1285,16 @@
 \b0 \cf3  \cf6 the_items\cf3  
 \b \cf3 to
 \b0 \cf3  \{\}\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
 \b0 \cf3  \cf6 the_delim\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		\cf2 -- set the_items to every text item of the_string\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		\cf2 -- set the_items to every text item of the_string\cf3 \
+		
 \b \cf3 set
 \b0 \cf3  \cf6 the_parts\cf3  
 \b \cf3 to
@@ -1352,10 +1316,8 @@
 \b0 \cf3  \cf6 the_item\cf3  
 \b \cf3 in
 \b0 \cf3  \cf6 the_parts\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			\cf2 -- set the_items to the_items & trim(the_item) as list\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			
+			\cf2 -- set the_items to the_items & trim(the_item) as list\cf3 \
+			
 \b \cf3 copy
 \b0 \cf3  \cf6 the_item\cf3  
 \b \cf3 to
@@ -1364,14 +1326,12 @@
 \b0 \cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 the_items\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 repeat
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -1383,14 +1343,12 @@
 \b0 \cf3  
 \i \cf5 list
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 on
 \b0 \cf3  
 \b \cf3 error
 \b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -1398,13 +1356,11 @@
 		
 \b \cf3 error
 \b0 \cf3  \cf3 "Can't do split: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 end
 \b0 \cf3  \cf7 explode\cf3 \
@@ -1420,12 +1376,10 @@
 \b0 \cf3  \cf6 ASTID\cf3  
 \b \cf3 to
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -1458,14 +1412,12 @@
 		
 \b \cf3 return
 \b0 \cf3  \cf6 the_string\cf3  \cf2 --> text\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 on
 \b0 \cf3  
 \b \cf3 error
 \b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -1473,13 +1425,11 @@
 		
 \b \cf3 error
 \b0 \cf3  \cf3 "Can't implode: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 end
 \b0 \cf3  \cf7 implode\cf3 \
@@ -1495,8 +1445,7 @@
 \b0 \cf3  \cf6 ASTID\cf3  
 \b \cf3 to
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 try
 \b0 \cf3 \
 		
@@ -1504,8 +1453,7 @@
 \b0 \cf3  
 \i \cf4 case
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			
+			
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -1535,14 +1483,12 @@
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 considering
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -1550,14 +1496,12 @@
 		
 \b \cf3 return
 \b0 \cf3  \cf6 theText\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 on
 \b0 \cf3  
 \b \cf3 error
 \b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 		
+		
 \b \cf3 set
 \b0 \cf3  \cf4 AppleScript's\cf3  \cf4 text item delimiters\cf3  
 \b \cf3 to
@@ -1565,13 +1509,11 @@
 		
 \b \cf3 error
 \b0 \cf3  \cf3 "Can't replaceString: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
+	
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 try
 \b0 \cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 end
 \b0 \cf3  \cf7 str_replace\cf3 \
