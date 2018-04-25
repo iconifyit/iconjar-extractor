@@ -36,3 +36,11 @@ IconJarExtractor would not be possible without the fantastic JSON AppleScript ut
 ## Donations
 
 Donations help open source developers continue to create free resources. You can donate to this project at https://paypal.me/iconify. 25% of all donations to this script will be contributed to MouseDown.net
+
+## Change Log
+2018-04-25 : Fixed a bug related to file names with spaces or commas (IconJar or icon file names) causing the script to break
+
+2018-04-25 : Added a dialog when the script finishes indicating the file location as well as a button to open the folder where the ZIP file containging the extracted icons is located
+
+## Known Issues
+- There are no known issues at this time. See **Reporting a Bug** above for instructions for reporting issues
