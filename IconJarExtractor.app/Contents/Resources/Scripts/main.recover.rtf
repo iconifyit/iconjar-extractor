@@ -67,6 +67,13 @@
 \b0 \cf3  \{\} & (
 \b \cf7 choose file
 \b0 \cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 uuid\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf8 short_uuid\cf3 ()\
 	\
 	
 \b \cf3 set
@@ -152,7 +159,7 @@
 \b \cf3 set
 \b0 \cf3  \cf6 theLogFile\cf3  
 \b \cf3 to
-\b0 \cf3  \cf6 rootOutputFolder\cf3  & \cf3 "iconjar-extractor-"\cf3  & \cf6 runCount\cf3  & \cf3 ".log"\cf3  
+\b0 \cf3  \cf6 rootOutputFolder\cf3  & \cf3 "iconjar-extractor-"\cf3  & \cf6 runCount\cf3  & \cf3 "-"\cf3  & \cf6 uuid\cf3  & \cf3 ".log"\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
@@ -543,13 +550,6 @@
 			\
 			\cf2 -- [4] -- Make a new directory for the exports\cf3 \
 			\
-			
-\b \cf3 set
-\b0 \cf3  \cf6 uuid\cf3  
-\b \cf3 to
-\b0 \cf3  
-\b \cf3 my
-\b0 \cf3  \cf8 short_uuid\cf3 ()\
 			
 \b \cf3 set
 \b0 \cf3  \cf6 theOutputPath\cf3  
