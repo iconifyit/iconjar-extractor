@@ -6,25 +6,10 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleOSTypes</key>
-			<array>
-				<string>****</string>
-			</array>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>*</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-		</dict>
-	</array>
 	<key>CFBundleExecutable</key>
-	<string>droplet</string>
+	<string>applet</string>
 	<key>CFBundleIconFile</key>
-	<string>droplet</string>
+	<string>applet</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mycompany.IconJarExtractor</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -34,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>dplt</string>
+	<string>aplt</string>
 	<key>LSMinimumSystemVersionByArchitecture</key>
 	<dict>
 		<key>x86_64</key>
