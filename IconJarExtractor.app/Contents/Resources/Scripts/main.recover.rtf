@@ -10,6 +10,7 @@
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf2 --\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 --	Created by: Scott Lewis\cf3 \
 \cf2 --	Created on: 4/18/18\cf3 \
 \cf2 --\cf3 \
@@ -459,14 +460,14 @@
 \b0 \cf3  \cf8 file_exists\cf3 (\cf6 newFilePath\cf3 ) 
 \b \cf3 then
 \b0 \cf3 \
-					\cf8 logger\cf3 (\cf3 "Doing shell script : "\cf3  & \cf3 "cp -R "\cf3  & \cf6 tmpFilePath\cf3  & \cf3 " "\cf3  & \cf6 newFilePath\cf3  
+					\cf8 logger\cf3 (\cf3 "Doing shell script : "\cf3  & \cf3 "cp -R "\cf3  & \cf8 str_replace\cf3 (\cf6 tmpFilePath\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 ) & \cf3 " "\cf3  & \cf8 str_replace\cf3 (\cf6 newFilePath\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 ) 
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
 					
 \b \cf7 do shell script
-\b0 \cf3  (\cf3 "cp -R "\cf3  & \cf6 tmpFilePath\cf3  & \cf3 " "\cf3  & \cf6 newFilePath\cf3  
+\b0 \cf3  (\cf3 "cp -R "\cf3  & \cf8 str_replace\cf3 (\cf6 tmpFilePath\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 ) & \cf3 " "\cf3  & \cf8 str_replace\cf3 (\cf6 newFilePath\cf3 , \cf3 " "\cf3 , \cf3 "\\\\ "\cf3 ) 
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string

@@ -35,7 +35,8 @@ I am happy to provide limited support at no charge. I am also available for hire
 2018-04-25 : Added a dialog when the script finishes indicating the file location as well as a button to open the folder where the ZIP file containging the extracted icons is located
 
 ## Known Issues
-- There are no known issues at this time. See **Reporting a Bug** above for instructions for reporting issues
+- Currently the script cannot handle file paths or file names with spaces
+- Currently the script cannot handle file names or paths with commas
 
 ## Acknowledgements
 - Thanks to Hemmo de Jong a. k. a., [Dutch Icon](https://twitter.com/dutchicon) for help testing (and his patience)
