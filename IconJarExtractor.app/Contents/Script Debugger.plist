@@ -67,9 +67,9 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>228</integer>
-								<integer>292</integer>
-								<integer>115</integer>
+								<integer>383</integer>
+								<integer>491</integer>
+								<integer>193</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -184,31 +184,6 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				</dict>
 				<key>eventLogHeight</key>
 				<real>343</real>
-				<key>eventLogViewState</key>
-				<dict>
-					<key>format</key>
-					<string>EventLogScopeBar_Source</string>
-					<key>resultState</key>
-					<dict>
-						<key>modes</key>
-						<array>
-							<string>mode.best</string>
-						</array>
-						<key>positions2</key>
-						<dict>
-							<key>positions</key>
-							<dict/>
-						</dict>
-						<key>prettyPrint</key>
-						<false/>
-					</dict>
-					<key>resultViewerWidth</key>
-					<real>410</real>
-					<key>scopeVisible</key>
-					<true/>
-					<key>showResultViewer</key>
-					<false/>
-				</dict>
 				<key>inspectorsViewState</key>
 				<dict>
 					<key>applications</key>
@@ -286,9 +261,9 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<array>
 							<dict>
 								<key>length</key>
-								<integer>0</integer>
+								<integer>316</integer>
 								<key>location</key>
-								<integer>754</integer>
+								<integer>419</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -300,7 +275,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 0}, {963, 634}}</string>
+						<string>{{0, 0}, {1498, 1065}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -329,7 +304,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>windowControllerID</key>
 				<string>1E0CFEE2-115B-46C8-A4B7-E072DE34CD1A-67565-0000F95BE4273969</string>
 				<key>windowFrame</key>
-				<string>0 40 1280 737 0 0 1280 777 </string>
+				<string>276 154 1815 1147 0 0 2560 1417 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -344,7 +319,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>0 40 1280 737 0 0 1280 777 </string>
+					<string>276 154 1815 1147 0 0 2560 1417 </string>
 				</dict>
 			</dict>
 		</array>
