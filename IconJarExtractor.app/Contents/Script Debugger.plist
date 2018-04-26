@@ -47,7 +47,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>expressionsState</key>
 					<dict>
 						<key>dividerPos</key>
-						<real>150</real>
+						<real>69</real>
 						<key>scope2.changedItems</key>
 						<true/>
 						<key>scope2.emptyElements</key>
@@ -67,9 +67,9 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>390</integer>
-								<integer>498</integer>
-								<integer>196</integer>
+								<integer>228</integer>
+								<integer>292</integer>
+								<integer>115</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -167,7 +167,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>variablesState</key>
 					<dict>
 						<key>dividerPos</key>
-						<real>149</real>
+						<real>69</real>
 						<key>scope2.changedItems</key>
 						<true/>
 						<key>scope2.emptyElements</key>
@@ -183,7 +183,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					</dict>
 				</dict>
 				<key>eventLogHeight</key>
-				<real>349</real>
+				<real>343</real>
 				<key>eventLogViewState</key>
 				<dict>
 					<key>format</key>
@@ -288,7 +288,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>1344</integer>
+								<integer>754</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -300,7 +300,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 189}, {1657, 725}}</string>
+						<string>{{0, 0}, {963, 634}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -314,7 +314,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<true/>
 				</dict>
 				<key>showEventLog</key>
-				<true/>
+				<false/>
 				<key>tabHeights</key>
 				<dict>
 					<key>tab.bps</key>
@@ -329,7 +329,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>windowControllerID</key>
 				<string>1E0CFEE2-115B-46C8-A4B7-E072DE34CD1A-67565-0000F95BE4273969</string>
 				<key>windowFrame</key>
-				<string>436 190 1974 1164 0 0 2560 1417 </string>
+				<string>0 40 1280 737 0 0 1280 777 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -344,7 +344,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>436 190 1974 1164 0 0 2560 1417 </string>
+					<string>0 40 1280 737 0 0 1280 777 </string>
 				</dict>
 			</dict>
 		</array>
