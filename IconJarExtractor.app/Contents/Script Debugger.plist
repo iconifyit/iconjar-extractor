@@ -283,9 +283,9 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<array>
 							<dict>
 								<key>length</key>
-								<integer>0</integer>
+								<integer>10</integer>
 								<key>location</key>
-								<integer>5283</integer>
+								<integer>1650</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -297,7 +297,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 1971}, {1711, 799}}</string>
+						<string>{{0, 0}, {1711, 799}}</string>
 						<key>ShowLineNumbers</key>
 						<true/>
 						<key>showCodeCoverage</key>
