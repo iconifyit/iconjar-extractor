@@ -15,16 +15,6 @@ This AppleScript droplet extracts icons from an IconJar archive and renames the 
 
 Icon marketplaces like Iconfinder can accept ZIP uploads and will use the names of your icons to automatically tag the icons. This script allows you to extract the icons from your IconJar files, rename them, and quickly upload them to Iconfinder without having to spend time manually re-tagging the icons.
 
-## Reporting a Bug
-
-Please report any issues to https://github.com/iconifyit/iconjar-exporter-appletscript/issues or via email at scott_at_atomic_lotus_dot_net.
-
-When reporting a bug, please include as much detail as possible including:
-
-- The year and model of your Mac computer
-- The version of MacOS running on your computer
-- The IconJar file you're trying to extract would also be very helpful
-
 ## Support
 
 I am happy to provide limited support at no charge. I am also available for hire for custom scripts and more complex support issues.
@@ -40,11 +30,18 @@ I am happy to provide limited support at no charge. I am also available for hire
 
 2018-04-27 : Added feature to allow users to save password in a text file instead of being prompted for the password every time a file is processed. NOTE: This is inherently risky. Use at your own risk. Securely delete the password file after use. This should only be used on a well-protected, private system.
 
+## Reporting a Bug
 
+Please report any issues to https://github.com/iconifyit/iconjar-exporter-appletscript/issues or via email at scott_at_atomic_lotus_dot_net.
+
+When reporting a bug, please include as much detail as possible including:
+
+- The year and model of your Mac computer
+- The version of MacOS running on your computer
+- The IconJar file you're trying to extract would also be very helpful
 
 ## Known Issues
-- Currently the script cannot handle file paths or file names with spaces
-- Currently the script cannot handle file names or paths with commas
+- None at this time
 
 ## Acknowledgements
 - Thanks to Hemmo de Jong a. k. a., [Dutch Icon](https://twitter.com/dutchicon) for help testing (and his patience)
@@ -52,4 +49,4 @@ I am happy to provide limited support at no charge. I am also available for hire
 
 ## Donations
 
-Donations help open source developers continue to create free resources. You can donate to this project via [my PayPal page](https://paypal.me/iconify). 25% of all donations to this script will be contributed to MouseDown.net
+Donations help open source developers continue to create free resources. You can donate to this project via [my PayPal page](https://paypal.me/iconify).
