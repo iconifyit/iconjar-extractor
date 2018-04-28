@@ -34,6 +34,14 @@ I am happy to provide limited support at no charge. I am also available for hire
 
 2018-04-25 : Added a dialog when the script finishes indicating the file location as well as a button to open the folder where the ZIP file containging the extracted icons is located
 
+2018-04-27 : Hardened the fix for file paths with file paths with spaces and/or commas
+
+2018-04-27 : Added 'on run' as well as 'on open' handlers to work as a droplet and double-clickable applet
+
+2018-04-27 : Added feature to allow users to save password in a text file instead of being prompted for the password every time a file is processed. NOTE: This is inherently risky. Use at your own risk. Securely delete the password file after use. This should only be used on a well-protected, private system.
+
+
+
 ## Known Issues
 - Currently the script cannot handle file paths or file names with spaces
 - Currently the script cannot handle file names or paths with commas
