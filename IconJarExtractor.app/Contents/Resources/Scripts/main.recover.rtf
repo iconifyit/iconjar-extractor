@@ -51,6 +51,11 @@
 
 \b \cf3 property
 \b0 \cf3  \cf6 ini_file\cf3  : \cf3 "~/Desktop/iconjarextractor-config.ini"\cf3 \
+
+\b \cf3 property
+\b0 \cf3  \cf6 has_ini_password\cf3  : 
+\i \cf4 false
+\i0 \cf3 \
 \
 
 \b \cf3 property
@@ -998,16 +1003,18 @@
 \b0 \cf3 \
 	\
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 	
-\b \cf3 tell
-\b0 \cf3  
-\i \cf5 application
-\i0 \cf3  \cf3 "Finder"\cf3 \
-		\cf7 logger\cf3 (\cf3 "Your icons have been renamed and moved to `"\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip`"\cf3  
+\cf3 	\cf7 logger\cf3 (\cf3 "Your icons have been renamed and moved to `"\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip`"\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 )\
+	
+\b \cf3 if
+\b0 \cf3  \cf7 file_exists\cf3 (\cf6 ini_file\cf3 ) 
+\b \cf3 and
+\b0 \cf3  \cf6 has_ini_password\cf3  
+\b \cf3 then
+\b0 \cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 		
 \b \cf3 set
@@ -1038,13 +1045,20 @@
 \b0 \cf3 \
 			
 \b \cf8 do shell script
-\b0 \cf3  (\cf3 "srm -v "\cf3  & \cf6 ini_file\cf3  
+\b0 \cf3  (\cf3 "rm -Pv "\cf3  & \cf6 ini_file\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 ) \cf9 password\cf3  \cf6 myPassword\cf3  
 \b \cf3 with
 \b0 \cf3  \cf8 administrator privileges\cf3 \
+			
+\b \cf3 set
+\b0 \cf3  \cf6 has_ini_password\cf3  
+\b \cf3 to
+\b0 \cf3  
+\i \cf4 false
+\i0 \cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 		
 \b \cf3 end
@@ -1052,9 +1066,24 @@
 \b \cf3 if
 \b0 \cf3 \
 	
+\b \cf3 else
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf8 display dialog
+\b0 \cf3  \'ac\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			(\cf3 "Fin! Your icons have been renamed and are ready for upload to your favorite icon market."\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) \'ac\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 				\cf8 buttons\cf3  \{\cf3 "Ok"\cf3 \} \cf8 default button\cf3  \cf3 1\cf3 \
+	
 \b \cf3 end
 \b0 \cf3  
-\b \cf3 tell
+\b \cf3 if
 \b0 \cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 	\cf7 logger\cf3 (\cf3 "-------------------- FIN! --------------------"\cf3 )\
@@ -2008,6 +2037,13 @@
 \b0 \cf3  \cf6 value\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 setting\cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 has_ini_password\cf3  
+\b \cf3 to
+\b0 \cf3  
+\i \cf4 true
+\i0 \cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 			
 \b \cf3 end

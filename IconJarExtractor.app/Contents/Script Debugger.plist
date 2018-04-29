@@ -285,7 +285,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>8947</integer>
+								<integer>8931</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -297,7 +297,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 3379}, {1073, 571}}</string>
+						<string>{{0, 3333}, {1073, 571}}</string>
 						<key>ShowLineNumbers</key>
 						<true/>
 						<key>showCodeCoverage</key>
@@ -326,7 +326,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>windowControllerID</key>
 				<string>1E0CFEE2-115B-46C8-A4B7-E072DE34CD1A-67565-0000F95BE4273969</string>
 				<key>windowFrame</key>
-				<string>593 203 1410 1082 0 0 2560 1417 </string>
+				<string>140 99 1410 1082 0 0 2560 1417 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -341,7 +341,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>593 203 1410 1082 0 0 2560 1417 </string>
+					<string>140 99 1410 1082 0 0 2560 1417 </string>
 				</dict>
 			</dict>
 		</array>

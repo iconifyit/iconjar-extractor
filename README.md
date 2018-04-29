@@ -16,8 +16,21 @@ This AppleScript droplet extracts icons from an IconJar archive and renames the 
 The script supports some minimal configuration in the form of an INI file. If you save a file named **iconjarextractor-config.ini** to the Desktop of your computer, the script will automatically import it and change the internal default settings to those you specify. 
 
 The available options are:
+| Setting        | Accepts      | Description  |
+| ------------- | ------------- | --------------------------------------------------------------------------------------------------------------------- |
+| logging       | 1 or 0        | 1 for true, 0 for false whether to enable logging |
+| debug         | 1 or 0        | 1 for true, 0 for false wether to enable debug mode |
+| output        | string        | A POSIX path the root output folder (default is ~/Desktop/iconjar-extractor/) |
+| output        | string        | The clear text administrator password to allow the script to perform privileged tasks (only writing to files/folders) |
 
-* logging {1 | 0}  		1 for true, 0 for false whether to enable logging* debug  {1 | 0}   		1 for true, 0 for false wether to enable debug mode* output {string}		A POSIX path the root output folder (default is ~/Desktop/iconjar-extractor/)* password {string}		The clear text administrator password to allow the script to perform privileged tasks (only writing to files/folders)**CAUTION!** Saving an administrator password in clear text is inherently risky. In fact, it is not advisable. However, the script may require an administrator password to write to some folders. If you do not specify a password in the INI file, the script will prompt you for your password. The INI support is offered as a convenience but you use it at your own risk. in order to minimize the risk, the script will give you the option to automatically secure delete the INI file upon completion.
+## Logging
+
+The script will write log messages to the Script Editor logger (for developers only). To enable logging, simply change the `logging` property in the script header to `true`, or add `logging = 1` to a `iconjarextractor-config.ini` file on your Desktop.
+
+## Debug Mode
+
+This script also comes with robust debugging for help trouble-shooting. This is primarily intended for developers and for those requesting support. To enable debug mode, create a file on the Desktop of your computer named `iconjarextractor-config.ini` and add a line with the text `debug = 1`. The debug log will be saved to the root of your output folder.
+**CAUTION!** Saving an administrator password in clear text is inherently risky. In fact, it is not advisable. However, the script may require an administrator password to write to some folders. If you do not specify a password in the INI file, the script will prompt you for your password. The INI support is offered as a convenience but you use it at your own risk. in order to minimize the risk, the script will give you the option to automatically secure delete the INI file upon completion.
 
 ## What is this for?
 
