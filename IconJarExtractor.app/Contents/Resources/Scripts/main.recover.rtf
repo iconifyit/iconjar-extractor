@@ -48,6 +48,9 @@
 \b0 \cf3  \cf6 debug\cf3  : 
 \i \cf4 true
 \i0 \cf3 \
+
+\b \cf3 property
+\b0 \cf3  \cf6 ini_file\cf3  : \cf3 "~/Desktop/iconjarextractor-config.ini"\cf3 \
 \
 
 \b \cf3 property
@@ -962,25 +965,7 @@
 \i0 \cf3 )\
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 			\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			\cf7 logger\cf3 (\cf3 "Your icons have been renamed and moved to `"\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip`"\cf3  
-\b \cf3 as
-\b0 \cf3  
-\i \cf5 string
-\i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			\cf2 --set theButtonReturned to button returned of (display dialog ("Fin! Your icons have been renamed and are ready for upload to your favorite icon market." as string) buttons \{"Open"\}) giving up after 3\cf3 \
-			\cf2 --if theButtonReturned is equal to "Open" then\cf3 \
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			
-\b \cf8 do shell script
-\b0 \cf3  (\cf3 "open "\cf3  & \cf6 theOutputFolder\cf3  
-\b \cf3 as
-\b0 \cf3  
-\i \cf5 string
-\i0 \cf3 )\
-\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
-\cf3 			\cf2 --end if\cf3 \
+			\cf2 --end if\cf3 \
 			\
 		
 \b \cf3 on
@@ -1010,6 +995,66 @@
 \b \cf3 end
 \b0 \cf3  
 \b \cf3 repeat
+\b0 \cf3 \
+	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 tell
+\b0 \cf3  
+\i \cf5 application
+\i0 \cf3  \cf3 "Finder"\cf3 \
+		\cf7 logger\cf3 (\cf3 "Your icons have been renamed and moved to `"\cf3  & \cf6 theOutputFolder\cf3  & \cf3 "/"\cf3  & \cf6 theFileBaseName\cf3  & \cf3 ".zip`"\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 set
+\b0 \cf3  \cf6 theButtonReturned\cf3  
+\b \cf3 to
+\b0 \cf3  \cf9 button returned\cf3  
+\b \cf3 of
+\b0 \cf3  (
+\b \cf8 display dialog
+\b0 \cf3  \'ac\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			(\cf3 "Fin! Your icons have been renamed and are ready for upload to your favorite icon market."\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) \'ac\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 				\cf8 buttons\cf3  \{\cf3 "Ok"\cf3 , \cf3 "Secure Delete INI"\cf3 \} \cf8 default button\cf3  \cf3 2\cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 if
+\b0 \cf3  \cf6 theButtonReturned\cf3  
+\b \cf3 is
+\b0 \cf3  
+\b \cf3 equal to
+\b0 \cf3  \cf3 "Secure Delete INI"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+			
+\b \cf8 do shell script
+\b0 \cf3  (\cf3 "srm -v "\cf3  & \cf6 ini_file\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 ) \cf9 password\cf3  \cf6 myPassword\cf3  
+\b \cf3 with
+\b0 \cf3  \cf8 administrator privileges\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 tell
 \b0 \cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 	\cf7 logger\cf3 (\cf3 "-------------------- FIN! --------------------"\cf3 )\
@@ -1841,11 +1886,6 @@
 
 \b \cf3 on
 \b0 \cf3  \cf7 load_config\cf3 ()\
-	
-\b \cf3 set
-\b0 \cf3  \cf6 ini_file\cf3  
-\b \cf3 to
-\b0 \cf3  \cf3 "~/Desktop/iconjarextractor-config.ini"\cf3 \
 	
 \b \cf3 if
 \b0 \cf3  \cf7 file_exists\cf3 (\cf7 to_posix\cf3 (\cf6 ini_file\cf3 )) 
