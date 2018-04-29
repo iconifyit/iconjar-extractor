@@ -65,6 +65,13 @@ I am happy to provide limited support at no charge. I am also available for hire
 
 2018-04-29 : Added support for an INI config file to change some settings. See "Changing Settings" above
 
+## Road Map
+
+* Create a cross-platform, native app in Electron.
+* Add ability to review and customize tags for each icon
+* Add option to update the IconJar archive with the new file names
+* Add ability to import icons to Adobe Illustrator or Sketch from the IconJar archive
+
 ## Known Issues
 - Currently the script cannot handle file paths or file names with spaces
 - Currently the script cannot handle file names or paths with commas
