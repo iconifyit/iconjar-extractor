@@ -186,7 +186,7 @@ on main(theFiles)
             do shell script ("cp " & theMetaExtractPath & " " & theMetaJsonPath as string)
             
             -- [8] -- Rename /icons/{icon} using tags
-            -- return
+
             logger("Start renaming icons ...")
             my rename_icons(theMetaJsonPath, theSrcFolder & "/icons/" as string)
             
