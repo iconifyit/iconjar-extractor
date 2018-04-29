@@ -106,6 +106,8 @@
 \cf2 -- FUNCTIONS\cf3 \
 \cf2 -- --------------------\cf3 \
 \
+\cf2 -- @param \{list\} theFiles  A list of file aliases\cf3 \
+\cf2 -- @returns void\cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
@@ -158,13 +160,9 @@
 \b \cf3 set
 \b0 \cf3  \cf6 myPassword\cf3  
 \b \cf3 to
-\b0 \cf3  \cf7 trim\cf3 ((
-\b \cf8 do shell script
-\b0 \cf3  (\cf3 "cat "\cf3  & \cf6 pass_file\cf3  
-\b \cf3 as
 \b0 \cf3  
-\i \cf5 string
-\i0 \cf3 )))\
+\b \cf3 my
+\b0 \cf3  \cf7 cat\cf3 (\cf6 pass_file\cf3 )\
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 	
 \b \cf3 end
@@ -172,6 +170,12 @@
 \b \cf3 if
 \b0 \cf3 \
 	\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 my
+\b0 \cf3  \cf7 load_config\cf3 ()\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	\
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 	
 \b \cf3 set
@@ -1013,6 +1017,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 main\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Gets just the name portion of a file path using bash `basename`\cf3 \
+\cf2 -- @param \{string\} thePath	A POSIX file path\cf3 \
+\cf2 -- @returns \{string\} the file name\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 basename\cf3 (\cf6 thePath\cf3 )\
@@ -1031,12 +1040,17 @@
 \b \cf3 end
 \b0 \cf3  \cf7 basename\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Gets the contents of a file using bash `cat`\cf3 \
+\cf2 -- @param \{string\} A POSIX file path\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 cat\cf3 (\cf6 theFile\cf3 )\
 	
 \b \cf3 return
-\b0 \cf3  
+\b0 \cf3  \cf7 trim\cf3 (
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "cat "\cf3  & \cf4 quoted form\cf3  
 \b \cf3 of
@@ -1044,11 +1058,16 @@
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
-\i0 \cf3 )\
+\i0 \cf3 ))\
 
 \b \cf3 end
 \b0 \cf3  \cf7 cat\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Verifies AppleScript version\cf3 \
+\cf2 -- @param \{number\} The minimum required AppleScript version\cf3 \
+\cf2 -- @returns \{boolean\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 check_version\cf3 (\cf6 required_version\cf3 )\
@@ -1093,6 +1112,12 @@
 \b \cf3 end
 \b0 \cf3  \cf7 check_version\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Copies a file using bash `cp`\cf3 \
+\cf2 -- @param \{string\} fromFile  A POSIX file path to copy from\cf3 \
+\cf2 -- @param \{string\} toFile    A POSIX file path to save to\cf3 \
+\cf2 -- @returns \{boolean\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 cp\cf3 (\cf6 fromFile\cf3 , \cf6 toFile\cf3 )\
@@ -1122,6 +1147,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 cp\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Formats a date in YEAR-MM-DD HH:MM:SS\cf3 \
+\cf2 -- @param \{string\} old_date  The date to reformat\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 date_format\cf3 (\cf6 old_date\cf3 ) \cf2 -- Old_date is text, not a date.\cf3 \
@@ -1159,6 +1189,10 @@
 \b \cf3 end
 \b0 \cf3  \cf7 date_format\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Returns the POSIX path to the Desktop folder\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 desktop_dir\cf3 ()\
@@ -1175,6 +1209,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 desktop_dir\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Gets the base folder portion of a file path\cf3 \
+\cf2 -- @param \{string\} thePath  A POSIX file path\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 dirname\cf3 (\cf6 thePath\cf3 )\
@@ -1193,6 +1232,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 dirname\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Expands a Mac OS path to the full POSIX path\cf3 \
+\cf2 -- @param \{string\} givenPath The Mac-formatte path to expand\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 expand_path\cf3 (\cf6 givenPath\cf3 )\
@@ -1203,6 +1247,12 @@
 \b \cf3 end
 \b0 \cf3  \cf7 expand_path\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Explodes a string to a list\cf3 \
+\cf2 -- @param \{string\} the_delim   The delimiter on which to split the string\cf3 \
+\cf2 -- @param \{string\} the_string  The string to split\cf3 \
+\cf2 -- @returns \{list\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 explode\cf3 (\cf6 the_delim\cf3 , \cf6 the_string\cf3 )\
@@ -1311,9 +1361,14 @@
 \b \cf3 end
 \b0 \cf3  \cf7 explode\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Checks whether or not a file exists\cf3 \
+\cf2 -- @param \{string\} theFile  A POSIX file path\cf3 \
+\cf2 -- @returns \{boolean\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
-\b0 \cf3  \cf7 file_exists\cf3 (\cf6 theFile\cf3 ) \cf2 -- (String) as Boolean\cf3 \
+\b0 \cf3  \cf7 file_exists\cf3 (\cf6 theFile\cf3 )\
 	
 \b \cf3 tell
 \b0 \cf3  
@@ -1337,26 +1392,31 @@
 \b \cf3 end
 \b0 \cf3  \cf7 file_exists\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Gets the file extension for a file\cf3 \
+\cf2 -- @param \{string\} file_name  The file name\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
-\b0 \cf3  \cf7 file_ext\cf3 (\cf6 file_name\cf3 )\
-	
-\b \cf3 set
-\b0 \cf3  \cf6 sh_script\cf3  
-\b \cf3 to
-\b0 \cf3  \cf3 "filename=\\""\cf3  & \cf6 file_name\cf3  & \cf3 "\\"; "\cf3  & \cf3 "echo $\{filename##*.\}"\cf3 \
+\b0 \cf3  \cf7 file_ext\cf3 (\cf6 aFile\cf3 )\
 	
 \b \cf3 return
 \b0 \cf3  (
 \b \cf8 do shell script
-\b0 \cf3  (\cf3 "filename=\\""\cf3  & \cf6 file_name\cf3  & \cf3 "\\"; "\cf3  & \cf3 "echo $\{filename##*.\}"\cf3 ))\
+\b0 \cf3  (\cf3 "filename=\\""\cf3  & \cf6 aFile\cf3  & \cf3 "\\"; "\cf3  & \cf3 "echo $\{filename##*.\}"\cf3 ))\
 
 \b \cf3 end
 \b0 \cf3  \cf7 file_ext\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Checks whether or not a folder exists\cf3 \
+\cf2 -- @param \{string\} theFile  A POSIX folder path\cf3 \
+\cf2 -- @returns \{boolean\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
-\b0 \cf3  \cf7 folder_exists\cf3 (\cf6 theFile\cf3 ) \cf2 -- (String) as Boolean\cf3 \
+\b0 \cf3  \cf7 folder_exists\cf3 (\cf6 theFile\cf3 )\
 	
 \b \cf3 set
 \b0 \cf3  \cf6 theFile\cf3  
@@ -1384,6 +1444,10 @@
 \b \cf3 end
 \b0 \cf3  \cf7 folder_exists\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Gets the version of AppleScript currently running\cf3 \
+\cf2 -- @returns \{number\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 get_as_version\cf3 ()\
@@ -1402,6 +1466,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 get_as_version\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Gets the file type identifier for a file\cf3 \
+\cf2 -- @param  \{string\} theFilePath  A POSIX file path for which to get the type code\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 get_file_type\cf3 (\cf6 theFilePath\cf3 )\
@@ -1438,6 +1507,10 @@
 \b \cf3 end
 \b0 \cf3  \cf7 get_file_type\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Gets the POSIX path to the home directory\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 home_dir\cf3 ()\
@@ -1459,6 +1532,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 home_dir\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Joins list to a string\cf3 \
+\cf2 -- @param \{string\} delimiter  The delimiter on which to join the list\cf3 \
+\cf2 -- @param \{list\} pieces          The list of stringst to join\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 implode\cf3 (\cf6 delimiter\cf3 , \cf6 pieces\cf3 )\
@@ -1532,6 +1610,13 @@
 \b \cf3 end
 \b0 \cf3  \cf7 implode\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Increments a number on the end of a target file name if the name already exists.\cf3 \
+\cf2 -- The function will try 65,535 numbers (max 16-bit number). If the name is still not unique,\cf3 \
+\cf2 -- the function will use a UUID instead.\cf3 \
+\cf2 -- @param \{string\} theFile  The target POSIX file path\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 increment_name\cf3 (\cf6 theFile\cf3 )\
@@ -1636,6 +1721,13 @@
 \b \cf3 end
 \b0 \cf3  \cf7 increment_name\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Increments a number on the end of a target folder name if the name already exists.\cf3 \
+\cf2 -- The function will try 65,535 numbers (max 16-bit number). If the name is still not unique,\cf3 \
+\cf2 -- the function will use a UUID instead.\cf3 \
+\cf2 -- @param \{string\} theFolder  The target POSIX folder path\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 increment_folder\cf3 (\cf6 theFolder\cf3 )\
@@ -1738,6 +1830,171 @@
 \b \cf3 end
 \b0 \cf3  \cf7 increment_folder\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Loads a config file for the script. The available settings are:\cf3 \
+\cf2 -- -- logging \{1 | 0\}  		1 for true, 0 for false whether to enable logging\cf3 \
+\cf2 -- -- debug  \{1 | 0\}   		1 for true, 0 for false wether to enable debug mode\cf3 \
+\cf2 -- -- output \{string\}		A POSIX path the root output folder (default is ~/Desktop/iconjar-extractor/)\cf3 \
+\cf2 -- -- password \{string\}		The clear text administrator password to allow the script to perform privileged tasks (only writing to files/folders)\cf3 \
+\cf2 -- @returns \{void\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 on
+\b0 \cf3  \cf7 load_config\cf3 ()\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 ini_file\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 "~/Desktop/iconjarextractor-config.ini"\cf3 \
+	
+\b \cf3 if
+\b0 \cf3  \cf7 file_exists\cf3 (\cf7 to_posix\cf3 (\cf6 ini_file\cf3 )) 
+\b \cf3 then
+\b0 \cf3 \
+		
+\b \cf3 set
+\b0 \cf3  \cf6 settings\cf3  
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 my
+\b0 \cf3  \cf7 parse_ini\cf3 (\cf7 to_posix\cf3 (\cf6 ini_file\cf3 ))\
+		
+\b \cf3 repeat
+\b0 \cf3  
+\b \cf3 with
+\b0 \cf3  \cf6 setting\cf3  
+\b \cf3 in
+\b0 \cf3  \cf6 settings\cf3 \
+			
+\b \cf5 log
+\b0 \cf3  \cf3 "Name : "\cf3  & \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf5 log
+\b0 \cf3  \cf3 "Value : "\cf3  & \cf6 value\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3  
+\b \cf3 as
+\b0 \cf3  
+\i \cf5 string
+\i0 \cf3 \
+			
+\b \cf3 if
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3  
+\b \cf3 is
+\b0 \cf3  \cf3 "logging"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 logging\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 value\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 if
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3  
+\b \cf3 is
+\b0 \cf3  \cf3 "debug"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 debug\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 value\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 if
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3  
+\b \cf3 is
+\b0 \cf3  \cf3 "output"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 rootOutputFolder\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 value\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 if
+\b0 \cf3  \cf4 name\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3  
+\b \cf3 is
+\b0 \cf3  \cf3 "password"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 set
+\b0 \cf3  \cf6 myPassword\cf3  
+\b \cf3 to
+\b0 \cf3  \cf6 value\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 setting\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 end
+\b0 \cf3  \cf7 load_config\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Conditionally makes a folder if it does not exist. If it does exist, \cf3 \
+\cf2 -- returns the POSIX file path (same as the argument), to verify.\cf3 \
+\cf2 -- @param  \{string\} theFolder  POSIX path to the folder\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 make_folder\cf3 (\cf6 theFolder\cf3 )\
@@ -1771,6 +2028,12 @@
 \b \cf3 end
 \b0 \cf3  \cf7 make_folder\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Rename a file using bash `mv`\cf3 \
+\cf2 -- @param \{string\} fromFile  POSIX path to the original file to rename\cf3 \
+\cf2 -- @param \{string\} toFile      POSIX path to the desired new location\cf3 \
+\cf2 -- @returns \{boolean\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 mv\cf3 (\cf6 fromFile\cf3 , \cf6 toFile\cf3 )\
@@ -1800,14 +2063,19 @@
 \b \cf3 end
 \b0 \cf3  \cf7 mv\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Loads an external script file\cf3 \
+\cf2 -- @param  \{string\}  scriptName POSIX path to the script to load\cf3 \
+\cf2 -- @returns \{boolean\} \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
-\b0 \cf3  \cf7 load_script\cf3 (\cf6 scriptName\cf3 )\
+\b0 \cf3  \cf7 load_script\cf3 (\cf6 scriptPath\cf3 )\
 	
 \b \cf3 set
 \b0 \cf3  \cf6 theScript\cf3  
 \b \cf3 to
-\b0 \cf3  (\cf7 desktop_dir\cf3 () & \cf6 scriptName\cf3  
+\b0 \cf3  (\cf6 scriptPath\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
@@ -1821,6 +2089,10 @@
 \b \cf3 end
 \b0 \cf3  \cf7 load_script\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Logs messages to Script Editor log if logging is enabled and a log file if debug is enabled.\cf3 \
+\cf2 -- @param \{string\} theMessage The message to log.\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 logger\cf3 (\cf6 theMessage\cf3 )\
@@ -1881,6 +2153,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 logger\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Alias of `dirname`\cf3 \
+\cf2 -- @param \{string\} thePath The file/folder for which to get the enclosing folder\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 parent_dir\cf3 (\cf6 thePath\cf3 )\
@@ -1898,7 +2175,145 @@
 \b0 \cf3  \cf7 parent_dir\cf3 \
 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Parses an INI format file\cf3 \
+\cf2 -- @param \{string\} ini_path	The POSIX path to the INI file\cf3 \
+\cf2 -- @returns \{list\}  				A list of AppleScript dictionaries in format \{name: "property", value: "value"\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 on
+\b0 \cf3  \cf7 parse_ini\cf3 (\cf6 ini_path\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 name_value_pairs\cf3  
+\b \cf3 to
+\b0 \cf3  \{\}\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 file_data\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 read_file\cf3 (\cf6 ini_path\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 file_data\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 str_replace\cf3 (\cf6 file_data\cf3 , (
+\b \cf8 ASCII character
+\b0 \cf3  \cf3 13\cf3 ), (
+\b \cf8 ASCII character
+\b0 \cf3  \cf3 10\cf3 ))\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 rows\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 explode\cf3 ((
+\b \cf8 ASCII character
+\b0 \cf3  \cf3 10\cf3 ), \cf6 file_data\cf3 )\
+	
+\b \cf3 repeat
+\b0 \cf3  
+\b \cf3 with
+\b0 \cf3  \cf6 this_row\cf3  
+\b \cf3 in
+\b0 \cf3  \cf6 rows\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 try
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 if
+\b0 \cf3  \cf4 length\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 this_row\cf3  
+\b \cf3 is
+\b0 \cf3  
+\b \cf3 greater than
+\b0 \cf3  \cf3 1\cf3  
+\b \cf3 then
+\b0 \cf3 \
+				
+\b \cf3 if
+\b0 \cf3  
+\b \cf3 first
+\b0 \cf3  
+\i \cf5 character
+\i0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf7 trim\cf3 (\cf6 this_row\cf3 ) 
+\b \cf3 is
+\b0 \cf3  
+\b \cf3 not
+\b0 \cf3  \cf3 ";"\cf3  
+\b \cf3 then
+\b0 \cf3 \
+					
+\b \cf3 set
+\b0 \cf3  \cf6 key_value\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 explode\cf3 (\cf3 "="\cf3 , \cf6 this_row\cf3 )\
+					
+\b \cf3 copy
+\b0 \cf3  \{\cf4 name\cf3 :\cf6 trim\cf3 ((
+\i \cf5 item
+\i0 \cf3  \cf3 1\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 key_value\cf3 )), \cf6 value\cf3 :\cf6 trim\cf3 ((
+\i \cf5 item
+\i0 \cf3  \cf3 2\cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 key_value\cf3 ))\} 
+\b \cf3 to
+\b0 \cf3  
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 of
+\b0 \cf3  \cf6 name_value_pairs\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 				
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+			
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 if
+\b0 \cf3 \
+		
+\b \cf3 on
+\b0 \cf3  
+\b \cf3 error
+\b0 \cf3  \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 			
+\b \cf3 error
+\b0 \cf3  \cf3 "Can't parse ini: "\cf3  & \cf6 eMsg\cf3  \cf5 number\cf3  \cf6 eNum\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 		
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 try
+\b0 \cf3 \
+	
+\b \cf3 end
+\b0 \cf3  
+\b \cf3 repeat
+\b0 \cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf3 	
+\b \cf3 return
+\b0 \cf3  \cf6 name_value_pairs\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 parse_ini\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 -- (BEGIN) - Progress bar\cf3 \
+\cf2 -- Creates a progress bar\cf3 \
+\cf2 -- @param \{number\} steps            The number of steps in the task\cf3 \
+\cf2 -- @param \{string\} descript           The text to appear on the progress dialog\cf3 \
+\cf2 -- @param \{string\} descript_add    Additional text to display in the dialog sub-text\cf3 \
+\cf2 -- @returns \{void\}\cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
@@ -1927,6 +2342,13 @@
 \b \cf3 end
 \b0 \cf3  \cf7 progress_start\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Updates a progress bar\cf3 \
+\cf2 -- @param \{number\} n          The current step number\cf3 \
+\cf2 -- @param \{number\} steps    The number of steps in the current task\cf3 \
+\cf2 -- @param \{string\} message  The message text\cf3 \
+\cf2 -- @returns \{void\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 progress_update\cf3 (\cf6 n\cf3 , \cf6 steps\cf3 , \cf6 message\cf3 )\
@@ -1939,6 +2361,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 progress_update\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Updates the progress bar's completed steps\cf3 \
+\cf2 -- @param \{nuber\} n  The number of the current step\cf3 \
+\cf2 -- @returns \{void\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 progress_step\cf3 (\cf6 n\cf3 )\
@@ -1951,6 +2378,10 @@
 \b \cf3 end
 \b0 \cf3  \cf7 progress_step\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Destroys the progress bar\cf3 \
+\cf2 -- @returns \{void\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 progress_end\cf3 ()\
@@ -1981,6 +2412,8 @@
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 -- (END) - Progress bar\cf3 \
 \
+\cf2 -- Returns current folder using bash `pwd` (Print Working Directory)\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
@@ -2006,6 +2439,12 @@
 \b \cf3 end
 \b0 \cf3  \cf7 read_file\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Renames the icons using the metadata from an IconJar file\cf3 \
+\cf2 -- @param \{string\} theMetaDataFile  The POSIX path to the metadata JSON file\cf3 \
+\cf2 -- @param \{string\} theIconsFolderPath  The POSIX path to the icons folder\cf3 \
+\cf2 -- @returns \{list\} List of updated icons JSON\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 rename_icons\cf3 (\cf6 theMetaDataFile\cf3 , \cf6 theIconFolderPath\cf3 )\
@@ -2280,6 +2719,12 @@
 \b \cf3 end
 \b0 \cf3  \cf7 rename_icons\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Makes a path POSIX safe. Replaces spaces and commas with dashes.\cf3 \
+\cf2 -- @param \{string\} theFileName   The file name to make safe.\cf3 \
+\cf2 -- @param \{string\} theFilePath     The path to the file\cf3 \
+\cf2 -- @returns \{string\}                     The new name\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 safe_file_name\cf3 (\cf6 theFileName\cf3 , \cf6 theFilePath\cf3 )\
@@ -2341,6 +2786,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 safe_file_name\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Makes a path POSIX safe. Replaces spaces and commas with dashes.\cf3 \
+\cf2 -- @param \{string\} theFilePath  The path to make POSIX safe.\cf3 \
+\cf2 -- @returns \{string\}                  The new name\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 safe_file_path\cf3 (\cf6 theFilePath\cf3 )\
@@ -2356,6 +2806,10 @@
 \b \cf3 end
 \b0 \cf3  \cf7 safe_file_path\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- A short, unique string\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 short_uuid\cf3 ()\
@@ -2387,6 +2841,13 @@
 \b \cf3 end
 \b0 \cf3  \cf7 short_uuid\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Replace a needle in haystack\cf3 \
+\cf2 -- @param \{string\} theText		The haystack\cf3 \
+\cf2 -- @param \{string\} oldString	The string to be replaced\cf3 \
+\cf2 -- @param \{string\} newString	The string with which to replace oldString\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 str_replace\cf3 (\cf6 theText\cf3 , \cf6 oldString\cf3 , \cf6 newString\cf3 )\
@@ -2479,6 +2940,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 str_replace\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Strips file extension\cf3 \
+\cf2 -- @param \{string\} file_name	The file name from which to strip the extension\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 strip_ext\cf3 (\cf6 file_name\cf3 )\
@@ -2491,30 +2957,45 @@
 \b \cf3 end
 \b0 \cf3  \cf7 strip_ext\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Transforms a string to uppercase\cf3 \
+\cf2 -- @param \{string\} theString	The string to transform\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
-\b0 \cf3  \cf7 str_to_upper\cf3 (\cf6 inString\cf3 )\
+\b0 \cf3  \cf7 str_to_upper\cf3 (\cf6 theString\cf3 )\
 	
 \b \cf3 return
 \b0 \cf3  (
 \b \cf8 do shell script
-\b0 \cf3  \cf3 "awk '\{ print toupper($0) \}' <<< \\""\cf3  & \cf6 inString\cf3  & \cf3 "\\""\cf3 )\
+\b0 \cf3  \cf3 "awk '\{ print toupper($0) \}' <<< \\""\cf3  & \cf6 theString\cf3  & \cf3 "\\""\cf3 )\
 
 \b \cf3 end
 \b0 \cf3  \cf7 str_to_upper\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Transforms a string to lowercase\cf3 \
+\cf2 -- @param \{string\} theString	The string to transform\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
-\b0 \cf3  \cf7 str_to_lower\cf3 (\cf6 inString\cf3 )\
+\b0 \cf3  \cf7 str_to_lower\cf3 (\cf6 theString\cf3 )\
 	
 \b \cf3 return
 \b0 \cf3  (
 \b \cf8 do shell script
-\b0 \cf3  \cf3 "awk '\{ print tolower($0) \}' <<< \\""\cf3  & \cf6 inString\cf3  & \cf3 "\\""\cf3 )\
+\b0 \cf3  \cf3 "awk '\{ print tolower($0) \}' <<< \\""\cf3  & \cf6 theString\cf3  & \cf3 "\\""\cf3 )\
 
 \b \cf3 end
 \b0 \cf3  \cf7 str_to_lower\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Converts a comma-separated list of tags to a dash-delimited slug with no spaces\cf3 \
+\cf2 -- @param \{string\} tags		The comma-separated liste of tags\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 tags_to_slug\cf3 (\cf6 tags\cf3 )\
@@ -2568,6 +3049,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 tags_to_slug\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Converts a path to POSIX path\cf3 \
+\cf2 -- @param \{string\} thePath		The path to convert to POSIX (can be an alias or path)\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 to_posix\cf3 (\cf6 thePath\cf3 )\
@@ -2586,6 +3072,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 to_posix\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Converts a POSIX path to an alias\cf3 \
+\cf2 -- @param \{string\} thePath		The POSIX path to convert to an alias\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 to_alias\cf3 (\cf6 thePath\cf3 )\
@@ -2602,6 +3093,11 @@
 \b \cf3 end
 \b0 \cf3  \cf7 to_alias\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 --  Trims white space from both ends of a string\cf3 \
+\cf2 -- @param \{string\} someText	The string to be trimmed\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 trim\cf3 (\cf6 someText\cf3 )\
@@ -2693,6 +3189,10 @@
 \b \cf3 end
 \b0 \cf3  \cf7 trim\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 -- Returns name of current user using bash `whoami`\cf3 \
+\cf2 -- @returns \{string\}\cf3 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
 \b0 \cf3  \cf7 whoami\cf3 ()\
