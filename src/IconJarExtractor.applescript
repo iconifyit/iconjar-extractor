@@ -203,9 +203,7 @@ on main(theFiles)
             
             logger("Do Shell Script : " & ("mv " & theSrcFolder & "/" & theFileBaseName & ".zip " & theOutputFolder & "/" as string) as string)
             do shell script ("mv " & theSrcFolder & "/" & theFileBaseName & ".zip " & theOutputFolder & "/" as string)
-            
-            --end if
-            
+                        
         on error eMsg number eNum
             logger(("[ERROR " & eNum & "] " & eMsg as string))
             display dialog ("[ERROR " & eNum & "] " & eMsg as string) buttons {"OK"}
