@@ -75,4 +75,4 @@ I am happy to provide limited support at no charge. I am also available for hire
 
 ## Donations
 
-Donations help open source developers continue to create free resources. You can donate to this project via [my PayPal page](https://paypal.me/iconify). 25% of all donations to this script will be contributed to MouseDown.net
+Donations help open source developers continue to create free resources. You can donate to this project via [my PayPal page](https://paypal.me/iconify).
