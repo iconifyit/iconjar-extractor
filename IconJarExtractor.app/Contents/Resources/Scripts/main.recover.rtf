@@ -56,6 +56,9 @@
 \b0 \cf3  \cf6 has_ini_password\cf3  : 
 \i \cf4 false
 \i0 \cf3 \
+
+\b \cf3 property
+\b0 \cf3  \cf6 theLogFile\cf3  : \cf3 ""\cf3 \
 \
 
 \b \cf3 property
@@ -1226,7 +1229,7 @@
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 
 \b \cf3 on
-\b0 \cf3  \cf7 date_format\cf3 (\cf6 old_date\cf3 ) \cf2 -- Old_date is text, not a date.\cf3 \
+\b0 \cf3  \cf7 date_format\cf3 (\cf6 old_date\cf3 )\
 	
 \b \cf3 set
 \b0 \cf3  \{\cf4 year\cf3 :\cf6 y\cf3 , 
@@ -2146,19 +2149,14 @@
 \b \cf3 on
 \b0 \cf3  \cf7 load_script\cf3 (\cf6 scriptPath\cf3 )\
 	
-\b \cf3 set
-\b0 \cf3  \cf6 theScript\cf3  
-\b \cf3 to
+\b \cf3 return
+\b0 \cf3  (
+\b \cf8 load script
 \b0 \cf3  (\cf6 scriptPath\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
-\i0 \cf3 )\
-	
-\b \cf3 return
-\b0 \cf3  (
-\b \cf8 load script
-\b0 \cf3  \cf6 theScript\cf3 )\
+\i0 \cf3 ))\
 
 \b \cf3 end
 \b0 \cf3  \cf7 load_script\cf3 \

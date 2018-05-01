@@ -503,8 +503,7 @@ end mv
 -- @param  {string}  scriptName POSIX path to the script to load
 -- @returns {boolean} 
 on load_script(scriptPath)
-    set theScript to (scriptPath as string)
-    return (load script theScript)
+    return (load script (scriptPath as string))
 end load_script
 
 -- Logs messages to Script Editor log if logging is enabled and a log file if debug is enabled.
