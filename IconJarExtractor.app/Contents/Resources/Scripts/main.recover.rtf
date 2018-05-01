@@ -56,6 +56,10 @@
 \b0 \cf3  \cf6 has_ini_password\cf3  : 
 \i \cf4 false
 \i0 \cf3 \
+\
+
+\b \cf3 property
+\b0 \cf3  \cf6 theJobFolder\cf3  : \cf3 ""\cf3 \
 
 \b \cf3 property
 \b0 \cf3  \cf6 theLogFile\cf3  : \cf3 ""\cf3 \
@@ -106,6 +110,9 @@
 	
 \b \cf3 my
 \b0 \cf3  \cf7 main\cf3 (\cf6 theFiles\cf3 )\
+	
+\b \cf3 my
+\b0 \cf3  \cf7 cleanup\cf3 ()\
 
 \b \cf3 end
 \b0 \cf3  
@@ -117,6 +124,30 @@
 \cf2 -- FUNCTIONS\cf3 \
 \cf2 -- --------------------\cf3 \
 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\b \cf3 on
+\b0 \cf3  \cf7 cleanup\cf3 ()\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theJobFolder\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 ""\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theLogFolder\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 ""\cf3 \
+	
+\b \cf3 set
+\b0 \cf3  \cf6 myPassword\cf3  
+\b \cf3 to
+\b0 \cf3  \cf3 ""\cf3 \
+
+\b \cf3 end
+\b0 \cf3  \cf7 cleanup\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf2 -- @param \{list\} theFiles  A list of file aliases\cf3 \
 \cf2 -- @returns void\cf3 \
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
@@ -296,7 +327,6 @@
 		
 \b \cf3 try
 \b0 \cf3 \
-			\
 \pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
 \cf3 			
 \b \cf3 set
