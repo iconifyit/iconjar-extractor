@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>SD4Version</key>
-	<string>7.0.2</string>
+	<string>7.0.3</string>
 	<key>SD5ConversionOffered</key>
 	<false/>
 	<key>SDAddUsedLibrariesOnExport</key>
@@ -67,9 +67,9 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>358</integer>
-								<integer>463</integer>
-								<integer>181</integer>
+								<integer>227</integer>
+								<integer>295</integer>
+								<integer>114</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -183,7 +183,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					</dict>
 				</dict>
 				<key>eventLogHeight</key>
-				<real>361</real>
+				<real>350.5</real>
 				<key>eventLogViewState</key>
 				<dict>
 					<key>format</key>
@@ -288,7 +288,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>2129</integer>
+								<integer>16175</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -300,7 +300,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 1234}, {1073, 591}}</string>
+						<string>{{0, 7447}, {943, 235.5}}</string>
 						<key>ShowLineNumbers</key>
 						<true/>
 						<key>showCodeCoverage</key>
@@ -329,7 +329,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>windowControllerID</key>
 				<string>1E0CFEE2-115B-46C8-A4B7-E072DE34CD1A-67565-0000F95BE4273969</string>
 				<key>windowFrame</key>
-				<string>582 225 1410 1082 0 0 2560 1417 </string>
+				<string>0 40 1280 737 0 0 1280 777 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -344,7 +344,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>582 225 1410 1082 0 0 2560 1417 </string>
+					<string>0 40 1280 737 0 0 1280 777 </string>
 				</dict>
 			</dict>
 		</array>

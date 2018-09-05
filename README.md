@@ -51,19 +51,22 @@ When reporting a bug, please include as much detail as possible including:
 I am happy to provide limited support at no charge. I am also available for hire for custom scripts and more complex support issues.
 
 ## Change Log
-2018-04-25 : Fixed a bug related to file names with spaces or commas (IconJar or icon file names) causing the script to break
 
-2018-04-25 : Added a dialog when the script finishes indicating the file location as well as a button to open the folder where the ZIP file containging the extracted icons is located
+2018-09-05 : Fixed a bug in 'on increment_folder' that caused the script to error out when used as a droplet. For now the calls to 'logger' were simply disabled. A possible work-around is also to just use the app via double-clicking the desktop icon rather than by dropping files on the icon.
 
-2018-04-27 : Hardened the fix for file paths with file paths with spaces and/or commas
-
-2018-04-27 : Added 'on run' as well as 'on open' handlers to work as a droplet and double-clickable applet
-
-2018-04-27 : Added feature to allow users to save password in a text file instead of being prompted for the password every time a file is processed. NOTE: This is inherently risky. Use at your own risk. Securely delete the password file after use. This should only be used on a well-protected, private system.
+2018-04-29 : Added support for an INI config file to change some settings. See "Changing Settings" above
 
 2018-04-29 : Added comments to all functions
 
-2018-04-29 : Added support for an INI config file to change some settings. See "Changing Settings" above
+2018-04-27 : Added feature to allow users to save password in a text file instead of being prompted for the password every time a file is processed. NOTE: This is inherently risky. Use at your own risk. Securely delete the password file after use. This should only be used on a well-protected, private system.
+
+2018-04-27 : Added 'on run' as well as 'on open' handlers to work as a droplet and double-clickable applet
+
+2018-04-27 : Hardened the fix for file paths with file paths with spaces and/or commas
+
+2018-04-25 : Added a dialog when the script finishes indicating the file location as well as a button to open the folder where the ZIP file containging the extracted icons is located
+
+2018-04-25 : Fixed a bug related to file names with spaces or commas (IconJar or icon file names) causing the script to break
 
 ## Road Map
 
@@ -75,6 +78,7 @@ I am happy to provide limited support at no charge. I am also available for hire
 ## Known Issues
 - Currently the script cannot handle file paths or file names with spaces
 - Currently the script cannot handle file names or paths with commas
+- There is an issue in the 'on increment_folder' method that happens only when run as a droplet. The calls to 'logger()' cause the script to error out. The work-around is to run the script by double-clicking the deskop icon rather than as a droplet.
 
 ## Acknowledgements
 - Thanks to Hemmo de Jong a. k. a., [Dutch Icon](https://twitter.com/dutchicon) for help testing (and his patience)
