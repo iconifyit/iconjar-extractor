@@ -69,7 +69,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 							<array>
 								<integer>227</integer>
 								<integer>295</integer>
-								<integer>114</integer>
+								<integer>113</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -183,7 +183,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					</dict>
 				</dict>
 				<key>eventLogHeight</key>
-				<real>350.5</real>
+				<real>340</real>
 				<key>eventLogViewState</key>
 				<dict>
 					<key>format</key>
@@ -288,7 +288,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>16175</integer>
+								<integer>28744</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -300,7 +300,7 @@ WVtga3SDh4+Yqq2yAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 7447}, {943, 235.5}}</string>
+						<string>{{0, 12596}, {943, 286}}</string>
 						<key>ShowLineNumbers</key>
 						<true/>
 						<key>showCodeCoverage</key>

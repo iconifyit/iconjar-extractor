@@ -1,8 +1,8 @@
 --
---    Created by: Scott Lewis
---    Created on: 4/18/18
+--	Created by: Scott Lewis
+--	Created on: 4/18/18
 --
---    Copyright © 2018 Atomic Lotus, LLC. All Rights Reserved.
+--	Copyright © 2018 Atomic Lotus, LLC. All Rights Reserved.
 --
 
 use AppleScript version "2.4" -- Yosemite (10.10) or later
@@ -15,6 +15,9 @@ property logging : true
 property debug : true
 property ini_file : "~/Desktop/iconjarextractor-config.ini"
 property has_ini_password : false
+
+property theJobFolder : ""
+property theLogFile : ""
 
 property myPassword : ""
 property _HERE_ : ""
@@ -30,11 +33,18 @@ end open
 on run
 	set theFiles to {} & (choose file)
 	my main(theFiles)
+	my cleanup()
 end run
 
 -- --------------------
 -- FUNCTIONS
 -- --------------------
+
+on cleanup()
+	set theJobFolder to ""
+	set theLogFolder to ""
+	set myPassword to ""
+end cleanup
 
 -- @param {list} theFiles  A list of file aliases
 -- @returns void
@@ -71,15 +81,14 @@ on main(theFiles)
 	repeat with theFile in theFiles
 		
 		try
-			
 			set theFilePath to POSIX path of theFile as string
 			set theFileInfo to info for theFile
 			set theFileName to name of theFileInfo
 			set theFileBaseName to my strip_ext(theFileName)
 			set theFileFolder to my dirname(theFilePath)
 			
-			set metaDataPath to ((POSIX path of theFile) & "META") as string
-			set iconsDirPath to ((POSIX path of theFile) & "icons/") as string
+			set metaDataPath to quoted form of ((POSIX path of theFile) & "META") as string
+			set iconsDirPath to quoted form of ((POSIX path of theFile) & "icons/") as string
 			
 			logger("File Name : " & theFileName as string)
 			logger("File Base Name : " & theFileBaseName as string)
@@ -228,10 +237,10 @@ on main(theFiles)
 end main
 
 -- Gets just the name portion of a file path using bash `basename`
--- @param {string} thePath    A POSIX file path
+-- @param {string} thePath	A POSIX file path
 -- @returns {string} the file name
 on basename(thePath)
-	return (do shell script ("basename " & quoted form of thePath as string))
+	return trim((do shell script ("basename " & quoted form of thePath as string)))
 end basename
 
 -- Gets the contents of a file using bash `cat`
@@ -264,7 +273,7 @@ end cp
 -- Formats a date in YEAR-MM-DD HH:MM:SS
 -- @param {string} old_date  The date to reformat
 -- @returns {string}
-on date_format(old_date) -- Old_date is text, not a date.
+on date_format(old_date)
 	set {year:y, month:m, day:d} to date old_date
 	tell (y * 10000 + m * 100 + d) as string to text 1 thru 4 & "." & text 5 thru 6 & "." & text 7 thru 8
 end date_format
@@ -279,7 +288,7 @@ end desktop_dir
 -- @param {string} thePath  A POSIX file path
 -- @returns {string}
 on dirname(thePath)
-	return (do shell script ("dirname " & quoted form of thePath as string))
+	return trim(do shell script ("dirname " & quoted form of thePath as string))
 end dirname
 
 -- Expands a Mac OS path to the full POSIX path
@@ -422,7 +431,7 @@ end increment_name
 -- @returns {string}
 on increment_folder(theFolder)
 	
-	set n to 0
+	set x to 0
 	
 	-- To keep things from getting out-of-hand, we limit the max number of 
 	-- repeats to 65,535 (the max 16-bit integer)
@@ -432,12 +441,12 @@ on increment_folder(theFolder)
 	set theBasename to basename(theFolder)
 	set theDirname to dirname(theFolder)
 	
-	logger("increment_folder theFolder : " & theFolder)
+	-- logger("increment_folder theFolder : " & theFolder as string)
 	
-	repeat while folder_exists(theFolder) and n < max
-		set theFolder to theDirname & "/" & theBasename & "-" & n as string
-		logger("increment_folder theFolder : " & theFolder)
-		set n to n + 1
+	repeat while folder_exists(theFolder) and x < max
+		set theFolder to theDirname & "/" & theBasename & "-" & x as string
+		-- logger("increment_folder theFolder : " & theFolder as string)
+		set x to x + 1
 	end repeat
 	
 	-- If we exhaust the maximum sequential numbers, in order to insure 
@@ -451,10 +460,10 @@ on increment_folder(theFolder)
 end increment_folder
 
 -- Loads a config file for the script. The available settings are:
--- -- logging {1 | 0}          1 for true, 0 for false whether to enable logging
--- -- debug  {1 | 0}           1 for true, 0 for false wether to enable debug mode
--- -- output {string}        A POSIX path the root output folder (default is ~/Desktop/iconjar-extractor/)
--- -- password {string}        The clear text administrator password to allow the script to perform privileged tasks (only writing to files/folders)
+-- -- logging {1 | 0}  		1 for true, 0 for false whether to enable logging
+-- -- debug  {1 | 0}   		1 for true, 0 for false wether to enable debug mode
+-- -- output {string}		A POSIX path the root output folder (default is ~/Desktop/iconjar-extractor/)
+-- -- password {string}		The clear text administrator password to allow the script to perform privileged tasks (only writing to files/folders)
 -- @returns {void}
 on load_config()
 	if file_exists(to_posix(ini_file)) then
@@ -469,7 +478,7 @@ on load_config()
 				set debug to value of setting
 			end if
 			if name of setting is "output" then
-				set rootOutputFolder to trim(value of setting)
+				set rootOutputFolder to value of setting
 			end if
 			if name of setting is "password" then
 				set myPassword to value of setting
@@ -484,6 +493,7 @@ end load_config
 -- @param  {string} theFolder  POSIX path to the folder
 -- @returns {string}
 on make_folder(theFolder)
+	set theFolder to trim(theFolder)
 	if not (my folder_exists(theFolder)) then
 		do shell script ("mkdir " & theFolder as string)
 	end if
@@ -514,7 +524,7 @@ on logger(theMessage)
 		log "[" & dateString & "] - " & quoted form of theMessage
 	end if
 	if debug is true then
-		do shell script ("echo [" & dateString & "] - " & quoted form of trim(theMessage) & " >> " & theLogFile as string)
+		do shell script ("echo [" & dateString & "] - " & quoted form of theMessage & " >> " & theLogFile as string)
 	end if
 end logger
 
@@ -526,8 +536,8 @@ on parent_dir(thePath)
 end parent_dir
 
 -- Parses an INI format file
--- @param {string} ini_path    The POSIX path to the INI file
--- @returns {list}                  A list of AppleScript dictionaries in format {name: "property", value: "value"}
+-- @param {string} ini_path	The POSIX path to the INI file
+-- @returns {list}  				A list of AppleScript dictionaries in format {name: "property", value: "value"}
 on parse_ini(ini_path)
 	set name_value_pairs to {}
 	set file_data to read_file(ini_path)
@@ -697,9 +707,9 @@ on short_uuid()
 end short_uuid
 
 -- Replace a needle in haystack
--- @param {string} theText        The haystack
--- @param {string} oldString    The string to be replaced
--- @param {string} newString    The string with which to replace oldString
+-- @param {string} theText		The haystack
+-- @param {string} oldString	The string to be replaced
+-- @param {string} newString	The string with which to replace oldString
 -- @returns {string}
 on str_replace(theText, oldString, newString)
 	local ASTID, theText, oldString, newString, lst
@@ -720,28 +730,28 @@ on str_replace(theText, oldString, newString)
 end str_replace
 
 -- Strips file extension
--- @param {string} file_name    The file name from which to strip the extension
+-- @param {string} file_name	The file name from which to strip the extension
 -- @returns {string}
 on strip_ext(file_name)
 	return (do shell script ("filename=\"" & file_name & "\"; " & "echo ${filename%.*}"))
 end strip_ext
 
 -- Transforms a string to uppercase
--- @param {string} theString    The string to transform
+-- @param {string} theString	The string to transform
 -- @returns {string}
 on str_to_upper(theString)
 	return (do shell script "awk '{ print toupper($0) }' <<< \"" & theString & "\"")
 end str_to_upper
 
 -- Transforms a string to lowercase
--- @param {string} theString    The string to transform
+-- @param {string} theString	The string to transform
 -- @returns {string}
 on str_to_lower(theString)
 	return (do shell script "awk '{ print tolower($0) }' <<< \"" & theString & "\"")
 end str_to_lower
 
 -- Converts a comma-separated list of tags to a dash-delimited slug with no spaces
--- @param {string} tags        The comma-separated liste of tags
+-- @param {string} tags		The comma-separated liste of tags
 -- @returns {string}
 on tags_to_slug(tags)
 	
@@ -757,21 +767,21 @@ on tags_to_slug(tags)
 end tags_to_slug
 
 -- Converts a path to POSIX path
--- @param {string} thePath        The path to convert to POSIX (can be an alias or path)
+-- @param {string} thePath		The path to convert to POSIX (can be an alias or path)
 -- @returns {string}
 on to_posix(thePath)
 	return ((POSIX path of my expand_path(thePath)) as string)
 end to_posix
 
 -- Converts a POSIX path to an alias
--- @param {string} thePath        The POSIX path to convert to an alias
+-- @param {string} thePath		The POSIX path to convert to an alias
 -- @returns {string}
 on to_alias(thePath)
 	(POSIX file (my expand_path(thePath))) as alias
 end to_alias
 
 --  Trims white space from both ends of a string
--- @param {string} someText    The string to be trimmed
+-- @param {string} someText	The string to be trimmed
 -- @returns {string}
 on trim(someText)
 	-- default values (all whitespace)
@@ -793,6 +803,3 @@ end trim
 on whoami()
 	return do shell script "whoami"
 end whoami
-
-
-

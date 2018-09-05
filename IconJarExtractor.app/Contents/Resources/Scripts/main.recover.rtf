@@ -344,6 +344,8 @@
 \b \cf3 set
 \b0 \cf3  \cf6 metaDataPath\cf3  
 \b \cf3 to
+\b0 \cf3  \cf4 quoted form\cf3  
+\b \cf3 of
 \b0 \cf3  ((\cf4 POSIX path\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theFile\cf3 ) & \cf3 "META"\cf3 ) 
@@ -355,6 +357,8 @@
 \b \cf3 set
 \b0 \cf3  \cf6 iconsDirPath\cf3  
 \b \cf3 to
+\b0 \cf3  \cf4 quoted form\cf3  
+\b \cf3 of
 \b0 \cf3  ((\cf4 POSIX path\cf3  
 \b \cf3 of
 \b0 \cf3  \cf6 theFile\cf3 ) & \cf3 "icons/"\cf3 ) 
@@ -1029,7 +1033,7 @@
 \b0 \cf3  \cf7 basename\cf3 (\cf6 thePath\cf3 )\
 	
 \b \cf3 return
-\b0 \cf3  (
+\b0 \cf3  \cf7 trim\cf3 ((
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "basename "\cf3  & \cf4 quoted form\cf3  
 \b \cf3 of
@@ -1037,7 +1041,7 @@
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
-\i0 \cf3 ))\
+\i0 \cf3 )))\
 
 \b \cf3 end
 \b0 \cf3  \cf7 basename\cf3 \
@@ -1205,7 +1209,7 @@
 \b0 \cf3  \cf7 dirname\cf3 (\cf6 thePath\cf3 )\
 	
 \b \cf3 return
-\b0 \cf3  (
+\b0 \cf3  \cf7 trim\cf3 (
 \b \cf8 do shell script
 \b0 \cf3  (\cf3 "dirname "\cf3  & \cf4 quoted form\cf3  
 \b \cf3 of
@@ -1666,7 +1670,7 @@
 	\
 	
 \b \cf3 set
-\b0 \cf3  \cf6 n\cf3  
+\b0 \cf3  \cf6 x\cf3  
 \b \cf3 to
 \b0 \cf3  \cf3 0\cf3 \
 	\
@@ -1690,8 +1694,7 @@
 \b \cf3 to
 \b0 \cf3  \cf7 dirname\cf3 (\cf6 theFolder\cf3 )\
 	\
-	\cf2 -- FYI: This call to logger and the one below cause an error that is currently unresolved.\cf3 \
-	\cf2 -- logger("increment_folder theFolder : " & theFolder)\cf3 \
+	\cf2 -- logger("increment_folder theFolder : " & theFolder as string)\cf3 \
 	\
 	
 \b \cf3 repeat
@@ -1699,22 +1702,22 @@
 \b \cf3 while
 \b0 \cf3  \cf7 folder_exists\cf3 (\cf6 theFolder\cf3 ) 
 \b \cf3 and
-\b0 \cf3  \cf6 n\cf3  < \cf6 max\cf3 \
+\b0 \cf3  \cf6 x\cf3  < \cf6 max\cf3 \
 		
 \b \cf3 set
 \b0 \cf3  \cf6 theFolder\cf3  
 \b \cf3 to
-\b0 \cf3  \cf6 theDirname\cf3  & \cf3 "/"\cf3  & \cf6 theBasename\cf3  & \cf3 "-"\cf3  & \cf6 n\cf3  
+\b0 \cf3  \cf6 theDirname\cf3  & \cf3 "/"\cf3  & \cf6 theBasename\cf3  & \cf3 "-"\cf3  & \cf6 x\cf3  
 \b \cf3 as
 \b0 \cf3  
 \i \cf5 string
 \i0 \cf3 \
-		\cf2 -- logger("increment_folder theFolder : " & theFolder)\cf3 \
+		\cf2 -- logger("increment_folder theFolder : " & theFolder as string)\cf3 \
 		
 \b \cf3 set
-\b0 \cf3  \cf6 n\cf3  
+\b0 \cf3  \cf6 x\cf3  
 \b \cf3 to
-\b0 \cf3  \cf6 n\cf3  + \cf3 1\cf3 \
+\b0 \cf3  \cf6 x\cf3  + \cf3 1\cf3 \
 	
 \b \cf3 end
 \b0 \cf3  
@@ -1909,6 +1912,11 @@
 
 \b \cf3 on
 \b0 \cf3  \cf7 make_folder\cf3 (\cf6 theFolder\cf3 )\
+	
+\b \cf3 set
+\b0 \cf3  \cf6 theFolder\cf3  
+\b \cf3 to
+\b0 \cf3  \cf7 trim\cf3 (\cf6 theFolder\cf3 )\
 	
 \b \cf3 if
 \b0 \cf3  
@@ -3007,8 +3015,4 @@
 \b0 \cf3  \cf3 "whoami"\cf3 \
 
 \b \cf3 end
-\b0 \cf3  \cf7 whoami\cf3 \
-\
-\
-\
-}
+\b0 \cf3  \cf7 whoami}
