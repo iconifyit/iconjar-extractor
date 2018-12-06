@@ -2,6 +2,15 @@
 
 This AppleScript droplet extracts icons from an IconJar archive and renames the icons using the tags set in IconJar.
 
+***
+#### Support Open Source Development
+
+Donations help open source developers, who are often self-employed freelancers, continue to create free resources. You can donate to this project using the button below.
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SZQVVSQDZS75A)
+
+***
+
 ## Usage
 
 1. Download this script to your Mac computer and extract the ZIP file. 
@@ -16,7 +25,8 @@ This AppleScript droplet extracts icons from an IconJar archive and renames the 
 The script supports some minimal configuration in the form of an INI file. If you save a file named **iconjarextractor-config.ini** to the Desktop of your computer, the script will automatically import it and change the internal default settings to those you specify. 
 
 The available options are:
-| Setting        | Accepts      | Description  |
+
+| Setting        | Accepts      | Description  |
 | ------------- | ------------- | --------------------------------------------------------------------------------------------------------------------- |
 | logging       | 1 or 0        | 1 for true, 0 for false whether to enable logging |
 | debug         | 1 or 0        | 1 for true, 0 for false wether to enable debug mode |
@@ -30,7 +40,9 @@ The script will write log messages to the Script Editor logger (for developers o
 ## Debug Mode
 
 This script also comes with robust debugging for help trouble-shooting. This is primarily intended for developers and for those requesting support. To enable debug mode, create a file on the Desktop of your computer named `iconjarextractor-config.ini` and add a line with the text `debug = 1`. The debug log will be saved to the root of your output folder.
-**CAUTION!** Saving an administrator password in clear text is inherently risky. In fact, it is not advisable. However, the script may require an administrator password to write to some folders. If you do not specify a password in the INI file, the script will prompt you for your password. The INI support is offered as a convenience but you use it at your own risk. in order to minimize the risk, the script will give you the option to automatically secure delete the INI file upon completion.
+
+
+**CAUTION!** Saving an administrator password in clear text is inherently risky. In fact, it is not advisable. However, the script may require an administrator password to write to some folders. If you do not specify a password in the INI file, the script will prompt you for your password. The INI support is offered as a convenience but you use it at your own risk. in order to minimize the risk, the script will give you the option to automatically secure delete the INI file upon completion.
 
 ## What is this for?
 
@@ -83,7 +95,3 @@ I am happy to provide limited support at no charge. I am also available for hire
 ## Acknowledgements
 - Thanks to Hemmo de Jong a. k. a., [Dutch Icon](https://twitter.com/dutchicon) for help testing (and his patience)
 - Thanks to [MouseDown.net](http://www.mousedown.net/mouseware/JSONHelper.html) for graciously providing a free copy of the JSON Helper app for AppleScript to this project. Please visit their page and donate.
-
-## Donations
-
-Donations help open source developers continue to create free resources. You can donate to this project via [my PayPal page](https://paypal.me/iconify).
