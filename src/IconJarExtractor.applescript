@@ -2,7 +2,7 @@
 --	Created by: Scott Lewis
 --	Created on: 4/18/18
 --
---	Copyright Â© 2018 Atomic Lotus, LLC. All Rights Reserved.
+--	Copyright © 2018 Atomic Lotus, LLC. All Rights Reserved.
 --
 
 use AppleScript version "2.4" -- Yosemite (10.10) or later
@@ -221,16 +221,16 @@ on main(theFiles)
 	
 	logger("Your icons have been renamed and moved to `" & theOutputFolder & "/" & theFileBaseName & ".zip`" as string)
 	if file_exists(ini_file) and has_ini_password then
-		set theButtonReturned to button returned of (display dialog Â¬
-			("Fin! Your icons have been renamed and are ready for upload to your favorite icon market." as string) Â¬
+		set theButtonReturned to button returned of (display dialog Â
+			("Fin! Your icons have been renamed and are ready for upload to your favorite icon market." as string) Â
 				buttons {"Ok", "Secure Delete INI"} default button 2)
 		if theButtonReturned is equal to "Secure Delete INI" then
 			do shell script ("rm -Pv " & ini_file as string) password myPassword with administrator privileges
 			set has_ini_password to false
 		end if
 	else
-		display dialog Â¬
-			("Fin! Your icons have been renamed and are ready for upload to your favorite icon market." as string) Â¬
+		display dialog Â
+			("Fin! Your icons have been renamed and are ready for upload to your favorite icon market." as string) Â
 				buttons {"Ok"} default button 1
 	end if
 	logger("-------------------- FIN! --------------------")
@@ -613,7 +613,7 @@ end read_file
 -- @param {string} theIconsFolderPath  The POSIX path to the icons folder
 -- @returns {list} List of updated icons JSON
 on rename_icons(theMetaDataFile, theIconFolderPath)
-	-- set theJsonData to read_file(theMetaDataFile as Â«class furlÂ»)
+	-- set theJsonData to read_file(theMetaDataFile as Çclass furlÈ)
 	
 	logger("Read JSON Data")
 	set theJsonData to (do shell script ("cat " & theMetaDataFile as string))
